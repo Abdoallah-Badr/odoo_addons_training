@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+      <record model="ir.ui.view" id="property_tree_view">
+        <field name="name">property.tree</field>
+        <field name="model">realestate.property</field>
+        <field name="arch" type="xml">
+            <tree string="properties list" >
+                <field name="name"/>
+                <field name="description"/>
+                <field name="classroom_id"/>
+                <field name="gpa"/>
+            </tree>
+        </field>
+    </record>
+     <record model="ir.ui.view" id="student_form_view">
+        <field name="name">student.form</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <form string="students form" class="styled_form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="gender" widget='radio'/>
+                        </group>
+                        <group>
+                            <field name="gpa"/>
+                            <field name="classroom_id"/>
+                            <field name="grade"/>
+                            <field name="subjects_num" invisible="grade==False"/>
+                            <field name="description"/>
+                        </group>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
