@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem id="school_menu"
+              name="School "
+              sequence="1"
+              web_icon="mohsen_school,static/description/icon.png"
+    />
+
+
+</odoo>
