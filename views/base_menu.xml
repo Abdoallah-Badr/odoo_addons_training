@@ -1,0 +1,18 @@
+<odoo>
+    <menuitem
+            id = "real_state_menu"
+            name = "Estate"
+    />
+    <menuitem
+            id = "properties_menu"
+            name = "Property"
+            parent = "real_state_menu"
+    />
+
+    <menuitem
+            id="properties_item"
+            name="properties"
+            parent="properties_menu"
+            action="real_state.properties_action"
+    />
+</odoo>
