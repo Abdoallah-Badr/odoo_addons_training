@@ -21,7 +21,9 @@ L       ong description of module's purpose
     'data': [
         'security/ir.model.access.csv',
         'views/base_menu_view.xml',
-        'views/estate_property_view.xml'
+        'views/estate_property_view.xml',
+        'views/estate_property_type_view.xml',
+        'views/estate_property_tags_view.xml'
     ],
     'demo': [],
     'installable': True,

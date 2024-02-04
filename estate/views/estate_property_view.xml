@@ -6,9 +6,17 @@
         <field name='arch' type="xml">
             <form delete="0">
                 <sheet>
-                    <group>
-                        <group>
+                    <div class="on_title">
+                        <label for="name"/>
+                        <h1>
                             <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+
+                        <group>
+                            <field name="property_tag_id" widget="many2many_tags"/>
+                            <field name="property_type_id"/>
                             <field name="postcode"/>
                             <field name="description"/>
                             <field name="date_availability"/>
@@ -34,6 +42,12 @@
                         <page string="offers" name="Offers">
                             <group>
                                 <field name="expected_price"/>
+                            </group>
+                        </page>
+                        <page string="other_info" name="Other Info">
+                            <group>
+                                <field name="buyer_id"/>
+                                <field name="seller_id"/>
                             </group>
                         </page>
                     </notebook>
@@ -66,9 +80,12 @@
         <field name='model'>estate.property</field>
         <field name='arch' type="xml">
             <search>
+                <field name="name"/>
+                <field name="postcode"/>
                 <group expand="0" string="">
                     <filter name="postcode_group" string="Postcode Group" context="{'group_by':'postcode'}"/>
                 </group>
+                <filter name="garden_filter" string="Garden" domain="[('garden','=','true')]"/>
             </search>
         </field>
     </record>

@@ -5,8 +5,12 @@ class EstateProperty(models.Model):
     _name='estate.property'
     _description='EstatePropertyDescription'
 
-    name=fields.Char(string='title',requried=1,default='new house',size=20)
+    name=fields.Char(string='Title',requried=1,size=20)
+    property_tag_id=fields.Many2many('estate.property.tags',string="Property Type")
+    property_type_id=fields.Many2one('estate.property.type',string="Property Type")
     postcode=fields.Char(string='Postcode',size=20)
+    buyer_id=fields.Many2one('res.partner',string="Buyer")
+    seller_id=fields.Many2one('res.partner',string="Seller")
     description=fields.Text(string='Description' )
     date_availability=fields.Date(string='Date Aavailability' )
     expected_price=fields.Float(string='Expected Price',required=True )
@@ -25,31 +29,4 @@ class EstateProperty(models.Model):
         ('west','West'),
     ])
 
-    # @api.constrains('age')
-    # def _check_age(self):
-    #     for rec in self:
-    #         if rec.age<6:
-    #             raise ValidationError(_("students must be older than 6 "))
-    #
-    # @api.onchange('grade')
-    # def check_grade(self):
-    #     for rec in self:
-    #         if rec.grade in ['fourth', 'fifth', 'sixth']:
-    #             rec.is_old=1
-    #             print('=================>',rec.is_old)
-    #         else:
-    #             rec.is_old=0
-    #             # print("=========================>",rec.is_old)
-    #
-    # @api.constrains('num_of_courses')
-    # def check_num_of_courses(self):
-    #      for rec in self:
-    #          if rec.num_of_courses < 6 and rec.is_old:
-    #              # print("'==========================>",rec.num_of_courses)
-    #              raise ValidationError(_("Students in the fourth grade or above are supposed to take more than 6 subjects "))
-    #
-    #
-    # @api.model
-    # def create(self, vals_list):
-    #     vals_list['student_seq']=self.env['ir.sequence'].next_by_code('student.sequence')
-    #     return super(StudentsManagment,self).create(vals_list)
+
