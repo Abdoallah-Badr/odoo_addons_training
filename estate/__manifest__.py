@@ -23,7 +23,8 @@ L       ong description of module's purpose
         'views/base_menu_view.xml',
         'views/estate_property_view.xml',
         'views/estate_property_type_view.xml',
-        'views/estate_property_tags_view.xml'
+        'views/estate_property_tags_view.xml',
+        'views/estate_property_offers_view.xml',
     ],
     'demo': [],
     'installable': True,

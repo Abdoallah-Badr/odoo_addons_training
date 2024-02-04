@@ -41,7 +41,7 @@
                         </page>
                         <page string="offers" name="Offers">
                             <group>
-                                <field name="expected_price"/>
+                                <field name="offer_ids"/>
                             </group>
                         </page>
                         <page string="other_info" name="Other Info">

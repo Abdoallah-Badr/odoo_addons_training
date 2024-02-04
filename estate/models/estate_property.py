@@ -28,5 +28,6 @@ class EstateProperty(models.Model):
         ('east','East'),
         ('west','West'),
     ])
+    offer_ids=fields.One2many('estate.property.offer','property_id')
 
 

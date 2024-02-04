@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_estate_property_offer_form" model="ir.ui.view">
+        <field name="name">estate.property.offer.form</field>
+        <field name='model'>estate.property.offer</field>
+        <field name='arch' type="xml">
+            <form delete="0">
+                <sheet>
+                    <group>
+                        <field name="price"/>
+                        <field name="status"/>
+                        <field name="buyer_id"/>
+                        <field name="seller_id"/>
+                        <field name="property_id"/>
+                    </group>
+                    <notebook>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_estate_property_offer_tree" model="ir.ui.view">
+        <field name="name">estate.property.offer.tree</field>
+        <field name='model'>estate.property.offer</field>
+        <field name='arch' type="xml">
+            <tree>
+                <field name="price"/>
+                <field name="status"/>
+                <field name="buyer_id"/>
+                <field name="seller_id"/>
+                <field name="property_id"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_estate_property_offer_search" model="ir.ui.view">
+        <field name="name">estate.property.offer.search</field>
+        <field name='model'>estate.property.offer</field>
+        <field name='arch' type="xml">
+            <search>
+                <field name="price"/>
+                <field name="status"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_estate_property_offer" model="ir.actions.act_window">
+        <field name="name">Offers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first offer!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="estate_property_offer_menu"
+              name="Property Offers"
+              sequence="2"
+              parent="settings_root_menu"
+              action="action_estate_property_offer"/>
+</odoo>
