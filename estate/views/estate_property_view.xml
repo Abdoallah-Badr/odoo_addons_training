@@ -15,21 +15,18 @@
                     <group>
 
                         <group>
+                            <!--                            <button name="action_test" string="object Button"  type="object" class="oe_highlight"/>-->
                             <field name="property_tag_id" widget="many2many_tags"/>
                             <field name="property_type_id"/>
                             <field name="postcode"/>
-                            <field name="description"/>
                             <field name="date_availability"/>
-                            <field name="expected_price"/>
-                            <field name="selling_price"/>
-                            <field name="bedrooms"/>
+
+
                         </group>
                         <group>
-                            <field name="living_area"/>
-                            <field name="facades"/>
-                            <field name="garden_area"/>
-                            <field name="garage"/>
-                            <field name="garden"/>
+                            <field name="expected_price"/>
+                            <field name="best_price"/>
+                            <field name="selling_price"/>
                         </group>
                     </group>
 
@@ -37,6 +34,13 @@
                         <page string="Description" name="Description">
                             <group>
                                 <field name="description" placeholder="Enter your Deescription"/>
+                                <field name="living_area"/>
+                                <field name="bedrooms"/>
+                                <field name="facades"/>
+                                <field name="garden_area"/>
+                                <field name="garage"/>
+                                <field name="garden"/>
+                                <field name="total_area"/>
                             </group>
                         </page>
                         <page string="offers" name="Offers">

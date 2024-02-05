@@ -1,3 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_estate_property_base_group,access.base.group.estate,model_estate_property,base.group_user,1,1,1,1
+access_estate_property_type_base_group,access.base.group.estate.type,model_estate_property_type,base.group_user,1,1,1,1
+access_estate_property__tags_base_group,access.base.group.estate.tags,model_estate_property_tags,base.group_user,1,1,1,1
+access_estate_property_offer_base_group,access.base.group.estate.offer,model_estate_property_offer,base.group_user,1,1,1,1
 
+,,,
