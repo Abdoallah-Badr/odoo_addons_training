@@ -19,6 +19,9 @@
                     <field name="garden_area"/>
                     <field name="garden_orientation"/>
                     <field name="description"/>
+                    <field name="buyer"/>
+                    <field name="salesperson"/>
+                    <field name="property_type_id"/>
                 </tree>
             </field>
         </record>
@@ -28,39 +31,48 @@
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
                 <form>
-                    <div class="oe_title">
-                        <label for="name"/>
-                        <h1>
-                            <field name="name"/>
-                        </h1>
-                    </div>
-                    <div class="oe_title">
-                        <label for="description"/>
-                        <h3>
-                            <field name="description"/>
-                        </h3>
-                    </div>
                     <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+                        </group>
+                        <group>
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
+                        </group>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="state" invisible="1"/>
+                        </group>
                         <notebook>
-                            <page string="Property Info">
+                            <page string="description">
+                                <div class="oe_title">
+                                    <label for="description"/>
+                                    <h3>
+                                        <field name="description"/>
+                                    </h3>
+                                </div>
                                 <group>
-                                    <field name="postcode"/>
                                     <field name="bedrooms"/>
                                     <field name="living_area"/>
                                     <field name="facades"/>
-                                </group>
-                                <group>
                                     <field name="garage"/>
                                     <field name="garden"/>
                                     <field name="garden_area"/>
                                     <field name="garden_orientation"/>
                                 </group>
                             </page>
-                            <page string="Process Info">
+                            <page string="Other Info">
                                 <group>
-                                    <field name="date_availability"/>
-                                    <field name="expected_price"/>
-                                    <field name="selling_price"/>
+                                    <field name="property_type_id"/>
+                                    <field name="buyer"/>
+                                    <field name="salesperson"/>
                                 </group>
                             </page>
                         </notebook>
@@ -87,6 +99,14 @@
                     <field name="garden_area"/>
                     <field name="garden_orientation"/>
                     <field name="description"/>
+                    <field name="buyer"/>
+                    <field name="salesperson"/>
+                    <field name="property_type_id"/>
+                    <separator/>
+                    <filter string="Availability" name="state" domain='[("state", "in", ["new", "offer_received"])]'/>
+                    <group expand="1" string="Group By">
+                        <filter string="postcode" name="postcode" context="{'group_by':'postcode'}"/>
+                    </group>
                 </search>
             </field>
         </record>

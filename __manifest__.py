@@ -7,8 +7,9 @@
     'depends': ['base'],
     'data': [
         "security/ir.model.access.csv",
-        "security/security.xml",
+        # "security/security.xml",
         "views/real_state_view.xml",
+        "views/estate_propert_type_view.xml",
         "views/base_menu.xml",
     ],
     'application': True,
