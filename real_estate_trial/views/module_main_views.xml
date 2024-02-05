@@ -1,40 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-            <!--    student action-->
     <record model="ir.actions.act_window" id="property_action">
         <field name="name">property</field>
-        <field name="res_model">school.student</field>
+        <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
-            <p class="oe_view_nocontent_create">Enter first student at your school</p>
+            <p class="oe_view_nocontent_create">Enter first property at your app</p>
         </field>
     </record>
 
-        <!--    teacher action-->
-    <record model="ir.actions.act_window" id="owner_action">
-        <field name="name">owner</field>
-        <field name="res_model">school.teacher</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create">Enter the first teacher at your school</p>
-        </field>
-    </record>
-
-       <!--    classroom action-->
-    <record model="ir.actions.act_window" id="dashboard_action">
-        <field name="name">dashboard</field>
-        <field name="res_model">school.classroom</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create">Define your classes</p>
-        </field>
-    </record>
-
-    <menuitem id="main_realstate_menu" name="Real Estate"/>
-    <menuitem id="realstate_menu" name="Real estate menu" parent="main_realstate_menu"/>
-    <menuitem id="realstate_detailed_menu" name="School sub menu " parent="realstate_menu"/>
-    <menuitem id="property_menu" name="Properties" parent="realstate_detailed_menu" action="property_action"/>
-    <menuitem id="owner_menu" name="Owners" parent="realstate_detailed_menu" action="owner_action"/>
-    <menuitem id="dashboard_menu" name="Dashboard" parent="realstate_detailed_menu" action="dashboard_action"/>
-
+    <menuitem id="main_estate_menu" name="Real Estate"/>
+    <menuitem id="estate_menu" name="Real estate menu" parent="main_estate_menu"/>
+    <menuitem id="estate_detailed_menu" name="estate sub menu " parent="estate_menu"/>
+    <menuitem id="property_menu" name="Properties" parent="estate_detailed_menu" action="property_action"/>
 </odoo>
+
