@@ -7,12 +7,17 @@
             <form delete="0">
                 <sheet>
                     <group>
+<!--                        <button name="inverse" string="object Button" type="object" class="oe_highlight"/>-->
+
                         <field name="price"/>
                         <field name="status"/>
                         <field name="buyer_id"/>
                         <field name="seller_id"/>
                         <field name="property_id"/>
+                        <field name="validity"/>
+                        <field name="date_deadline"/>
                     </group>
+
                     <notebook>
                     </notebook>
 
