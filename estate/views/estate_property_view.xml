@@ -35,11 +35,12 @@
                             <group>
                                 <field name="description" placeholder="Enter your Deescription"/>
                                 <field name="living_area"/>
+                                <field name="gardens_area"/>
                                 <field name="bedrooms"/>
                                 <field name="facades"/>
-                                <field name="garden_area"/>
                                 <field name="garage"/>
                                 <field name="garden"/>
+                                <field name="garden_orientation"/>
                                 <field name="total_area"/>
                             </group>
                         </page>

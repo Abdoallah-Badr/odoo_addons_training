@@ -16,35 +16,35 @@ class EstateProperty(models.Model):
     description = fields.Text(string='Description')
     date_availability = fields.Date(string='Date Aavailability')
     expected_price = fields.Float(string='Expected Price', required=True)
-    best_price = fields.Float(string='Best Price', required=True)
+    # best_price = fields.Float(string='Best Price', required=True)
     selling_price = fields.Float(string='Selling Price')
     bedrooms = fields.Integer(string='bedrooms')
     living_area = fields.Integer(string='Living Area', default=0)
     facades = fields.Integer(string='Facades')
-    garden_area = fields.Integer(string='Garden Area', default=0)
     garage = fields.Boolean(string='Garage')
     garden = fields.Boolean(string='garden')
     age = fields.Integer(string='Age', default=6)
-    gender = fields.Selection([
+    garden_orientation = fields.Selection([
         ('north', 'North'),
         ('south', 'South'),
         ('east', 'East'),
         ('west', 'West'),
-    ])
+    ],string='Garden Orientation')
+    gardens_area=fields.Integer(string="Garden Area",default=0)
     total_area = fields.Integer(string='Total Area', compute='_compute_total_area')
     offer_ids = fields.One2many('estate.property.offer', 'property_id')
     best_price = fields.Float(string='Best Price', compute='_compute_best_price', store=True,default=0)
 
-    @api.depends('living_area', 'garden_area')
+
     def _compute_total_area(self):
         for rec in self:
             rec.total_area = rec.living_area + rec.garden_area
 
 
-    # @api.depends('offer_ids.price')
-    # def _compute_best_price(self):
-    #     for property_record in self:
-    #         property_record.best_price = max(property_record.offer_ids.mapped('price'), default=0.0)
+    @api.depends('price')
+    def _compute_best_price(self):
+        for property_record in self:
+            property_record.best_price = max(property_record.offer_ids.mapped('price'), default=0.0)
 
     @api.depends('offer_ids')
     def _compute_best_price(self):
@@ -52,3 +52,14 @@ class EstateProperty(models.Model):
             # print(rec.offer_ids.mapped('price'))
             # print(max(rec.offer_ids.mapped('price')))
             rec.best_price = max(rec.offer_ids.mapped('price'),default=0)
+
+
+    @api.onchange('garden')
+    def garden_area(self):
+        for rec in self:
+            if rec.garden:
+                rec.gardens_area=10
+                rec.garden_orientation='north'
+            else:
+                rec.gardens_area=0
+                rec.garden_orientation=''
