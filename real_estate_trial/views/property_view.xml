@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record model="ir.ui.view" id="property_search_view">
-                <field name="name">property.tree</field>
-                <field name="model">estate.property</field>
-                <field name="arch" type="xml">
-                        <search>
-                            <field name="title" />
-                            <field name="post_code" />
-                            <field name="expected_price" />
-                            <field name="bedrooms" />
-                            <field name="living_area" />
-                            <field name="living_area" />
-                        </search>
-                </field>
+        <field name="name">property.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="title"/>
+                <field name="post_code"/>
+                <field name="expected_price"/>
+                <field name="bedrooms"/>
+                <field name="living_area"/>
+                <field name="living_area"/>
+                <filter name="filter_available" domain="[('status', '!=', 'sold'), ('status', '!=', 'canceled')]"
+                        string="Available"/>
+                <filter name="group_postcode" string="postcode" context="{'group_by': 'post_code'}"/>
+
+            </search>
+        </field>
     </record>
     <record model="ir.ui.view" id="property_tree_view">
         <field name="name">property.tree</field>
