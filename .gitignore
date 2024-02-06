@@ -1,3 +1,4 @@
 # Ignored files
-  __pycache__/__init__.cpython-310.pyc
-
+__pycache__/*
+models/__pycache__/*
+__pycache__/

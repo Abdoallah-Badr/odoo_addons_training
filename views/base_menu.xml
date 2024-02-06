@@ -32,5 +32,11 @@
             parent="properties_menu"
             action="real_state.properties_action"
     />
+    <menuitem
+            id="properties_offer"
+            name="Offer"
+            parent="properties_menu"
+            action="real_state.offer_action"
+    />
 
 </odoo>
