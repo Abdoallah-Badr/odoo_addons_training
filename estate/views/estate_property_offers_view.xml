@@ -12,7 +12,9 @@
                         <field name="buyer_id"/>
                         <field name="seller_id"/>
                         <field name="property_id"/>
-                    </group>
+<!--                        <button name="accept_offer" string="Accept"  type="object" icon="fa-check"/>-->
+<!--                        <button name="refuse_offer" string="Refuse"  type="object" icon="fa-check"/>-->
+<!--                    </group>-->
                     <notebook>
                     </notebook>
 
@@ -30,6 +32,8 @@
                 <field name="buyer_id"/>
                 <field name="seller_id"/>
                 <field name="property_id"/>
+<!--                <button name="accept_offer" string="Accept"  type="object" icon="fa-check"/>-->
+<!--                <button name="refuse_offer" string="Refuse"  type="object" icon="fa-check"/>-->
 
             </tree>
         </field>
