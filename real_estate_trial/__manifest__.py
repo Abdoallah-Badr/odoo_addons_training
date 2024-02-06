@@ -17,6 +17,7 @@
     'data': [
          'security/ir.model.access.csv',
          'views/module_main_views.xml',
+        'views/property_view.xml',
     ],
     # 'assets': {'web.assets_backend':['static/src/css/styles.css']},
     'installable':True,
