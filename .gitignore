@@ -1,2 +1,10 @@
+
+#python file
 **/*realestate_owner.py
 **/*realestate_dashborad.py
+
+#xml view file
+**/*dashboard_view.xml
+**/*property_view.xml
+
+real_estate_trial/models/__pycache__

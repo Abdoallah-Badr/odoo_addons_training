@@ -20,10 +20,33 @@
             <form string="students form">
                 <sheet>
                     <group>
-                        <field name="name"/>
+                            <field name="title"/>
+                            <field name="description"/>
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="post_code"/>
+                            <field name="expected_price"/>
+                            <field name="bedrooms"/>
+                            <field name="facades"/>
+                            <field name="garden"/>
+                            <field name="garden_orien"/>
+                            <field name="active"/>
+                        </group>
+                         <group>
+                            <field name="available_form"/>
+                            <field name="sell_price"/>
+                            <field name="living_area"/>
+                            <field name="garage"/>
+                            <field name="garden_area"/>
+                             <field name="garden_area"/>
+                            <field name="status"/>
+                        </group>
                     </group>
                 </sheet>
             </form>
+
         </field>
     </record>
 </odoo>
