@@ -5,10 +5,6 @@
         <field name='model'>estate.property</field>
         <field name='arch' type="xml">
             <form delete="0">
-                <header>
-<!--                    <button name="action_do_something" type="object" string="Do Something"/>-->
-<!--                    <button name="action_do_something" type="object" string="Do it"/>-->
-                </header>
                 <sheet>
                     <div class="on_title">
                         <label for="name"/>
@@ -20,7 +16,6 @@
 
                         <group>
                             <!--                            <button name="action_test" string="object Button"  type="object" class="oe_highlight"/>-->
-                            <field name="status"/>
                             <field name="property_tag_id" widget="many2many_tags"/>
                             <field name="property_type_id"/>
                             <field name="postcode"/>

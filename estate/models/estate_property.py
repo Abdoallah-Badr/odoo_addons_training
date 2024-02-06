@@ -16,6 +16,7 @@ class EstateProperty(models.Model):
     description = fields.Text(string='Description')
     date_availability = fields.Date(string='Date Aavailability')
     expected_price = fields.Float(string='Expected Price', required=True)
+    best_price = fields.Float(string='Best Price', required=True)
     selling_price = fields.Float(string='Selling Price')
     bedrooms = fields.Integer(string='bedrooms')
     living_area = fields.Integer(string='Living Area', default=0)
@@ -24,7 +25,7 @@ class EstateProperty(models.Model):
     garage = fields.Boolean(string='Garage')
     garden = fields.Boolean(string='garden')
     age = fields.Integer(string='Age', default=6)
-    garden_orientation = fields.Selection([
+    gender = fields.Selection([
         ('north', 'North'),
         ('south', 'South'),
         ('east', 'East'),
@@ -32,13 +33,7 @@ class EstateProperty(models.Model):
     ])
     total_area = fields.Integer(string='Total Area', compute='_compute_total_area')
     offer_ids = fields.One2many('estate.property.offer', 'property_id')
-    best_price = fields.Float(string='Best Price', store=True,default=0)
-
-    status=fields.Selection([
-        ('new', 'New'),
-        ('canceled', 'Canceled'),
-        ('Sold', 'Sold'),
-    ])
+    best_price = fields.Float(string='Best Price', compute='_compute_best_price', store=True,default=0)
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
@@ -53,17 +48,5 @@ class EstateProperty(models.Model):
             # print(rec.offer_ids.mapped('price'))
             # print(max(rec.offer_ids.mapped('price')))
             rec.best_price = max(rec.offer_ids.mapped('price'),default=0)
-
-    # @api.onchange("garden")
-    # def _onchange_garden(self):
-    #     for rec in self:
-    #         if rec.garden:
-    #             rec.garden_orientation='north'
-    #             rec.garden_area=10
-    #         else:
-    #             rec.garden_area=0
-    #             rec.garden_orientation=''
-
-
 
 
