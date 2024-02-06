@@ -10,6 +10,7 @@
         # "security/security.xml",
         "views/real_state_view.xml",
         "views/estate_propert_type_view.xml",
+        "views/estate_propert_tag_view.xml",
         "views/base_menu.xml",
     ],
     'application': True,

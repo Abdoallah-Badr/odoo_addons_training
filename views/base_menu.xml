@@ -20,6 +20,12 @@
             parent="settings_menu"
             action="real_state.properties_type_action"
     />
+    <menuitem
+            id="properties_tag_item"
+            name="properties Tag"
+            parent="settings_menu"
+            action="real_state.properties_tag_action"
+    />
      <menuitem
             id="properties_item"
             name="properties"

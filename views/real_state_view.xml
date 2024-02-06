@@ -8,6 +8,7 @@
                 <tree>
                     <field name="name"/>
                     <field name="postcode"/>
+                    <field name="tag_ads"/>
                     <field name="date_availability"/>
                     <field name="expected_price"/>
                     <field name="selling_price"/>
@@ -20,7 +21,7 @@
                     <field name="garden_orientation"/>
                     <field name="description"/>
                     <field name="buyer"/>
-                    <field name="salesperson"/>
+                    <field name="salesman"/>
                     <field name="property_type_id"/>
                 </tree>
             </field>
@@ -38,13 +39,20 @@
                                 <field name="name"/>
                             </h1>
                         </div>
+                        <div lass="oe_title">
+                            <h3>
+                                <field name="tag_ads" widget="many2many_tags"/>
+                            </h3>
+                        </div>
                         <group>
-                            <field name="postcode"/>
-                            <field name="date_availability"/>
-                        </group>
-                        <group>
-                            <field name="expected_price"/>
-                            <field name="selling_price"/>
+                            <group>
+                                <field name="postcode"/>
+                                <field name="date_availability"/>
+                            </group>
+                            <group>
+                                <field name="expected_price"/>
+                                <field name="selling_price"/>
+                            </group>
                         </group>
                         <group>
                             <field name="active" invisible="1"/>
@@ -72,7 +80,7 @@
                                 <group>
                                     <field name="property_type_id"/>
                                     <field name="buyer"/>
-                                    <field name="salesperson"/>
+                                    <field name="salesman"/>
                                 </group>
                             </page>
                         </notebook>
@@ -88,6 +96,7 @@
                 <search>
                     <field name="name"/>
                     <field name="postcode"/>
+                    <field name="tag_ads"/>
                     <field name="date_availability"/>
                     <field name="expected_price"/>
                     <field name="selling_price"/>
@@ -100,7 +109,7 @@
                     <field name="garden_orientation"/>
                     <field name="description"/>
                     <field name="buyer"/>
-                    <field name="salesperson"/>
+                    <field name="salesman"/>
                     <field name="property_type_id"/>
                     <separator/>
                     <filter string="Availability" name="state" domain='[("state", "in", ["new", "offer_received"])]'/>
