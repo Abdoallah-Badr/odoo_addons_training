@@ -8,13 +8,16 @@
                 <sheet>
                     <group>
                         <field name="price"/>
-                        <field name="status"/>
+                        <field name="state"/>
                         <field name="buyer_id"/>
                         <field name="seller_id"/>
                         <field name="property_id"/>
-<!--                        <button name="accept_offer" string="Accept"  type="object" icon="fa-check"/>-->
-<!--                        <button name="refuse_offer" string="Refuse"  type="object" icon="fa-check"/>-->
-<!--                    </group>-->
+                        <button name="accept_offer" string="Accept Offer" type="object" class="btn-primary"
+                                icon="fa fa-check"/>
+                        <button name="refuse_offer" string="Refuse Offer" type="object" class="btn-danger"
+                                icon="fa fa-times"/>
+
+                    </group>
                     <notebook>
                     </notebook>
 
@@ -28,12 +31,16 @@
         <field name='arch' type="xml">
             <tree>
                 <field name="price"/>
-                <field name="status"/>
-                <field name="buyer_id"/>
-                <field name="seller_id"/>
+                <field name="state"/>
+                <field name="buyer_id" />
+                <field name="seller_id" />
                 <field name="property_id"/>
-<!--                <button name="accept_offer" string="Accept"  type="object" icon="fa-check"/>-->
-<!--                <button name="refuse_offer" string="Refuse"  type="object" icon="fa-check"/>-->
+                <field name="validity"/>
+                <field name="date_deadline"/>
+                <button name="accept_offer" string="Accept Offer" type="object" class="btn-primary"
+                        icon="fa-check"/>
+                <button name="refuse_offer" string="Refuse Offer" type="object" class="btn-danger"
+                        icon="fa-times"/>
 
             </tree>
         </field>
@@ -45,7 +52,7 @@
         <field name='arch' type="xml">
             <search>
                 <field name="price"/>
-                <field name="status"/>
+                <field name="state"/>
             </search>
         </field>
     </record>

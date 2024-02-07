@@ -7,7 +7,7 @@ class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'EstatePropertyDescription'
 
-    name = fields.Char(string='Title', requried=1, size=20)
+    name = fields.Char(string='Title', requried=True, size=20)
     status = fields.Selection([('canceled', 'Canceled'), ('new', 'New'), ('sold', 'Sold')], string='Statsu')
     property_tag_id = fields.Many2many('estate.property.tags', string="Property Type")
     property_type_id = fields.Many2one('estate.property.type', string="Property Type")
@@ -85,3 +85,26 @@ class EstateProperty(models.Model):
                 raise exceptions.UserError("Cannot confirm sale for a canceled item.")
             else:
                 record.status='sold'
+
+    @api.depends('')
+    def confirm_price(self):
+        for rec in self:
+            if rec.offer_ids.status=='accepted':
+                rec.selling_price=rec.offer_ids.price
+            else:
+                rec.selling_price=0
+
+    def accept_offer(self):
+        searched = self.env['estate.property'].search([])
+        for rec in self:
+            mapped=rec.offer_ids.mapped('status')
+            if 'accepted' in mapped:
+                print()
+
+        # mapped = searched.mapped('offer_ids')
+        # print('gj;kedgjkfdgjk;', mapped)
+        # # if 'accepted' in mapped:
+        # #     raise exceptions.UserError("Cannot accept this offer as u already accept one.")
+        # # else:
+        # #     for rec in self:
+        # #         rec.status='accepted'
