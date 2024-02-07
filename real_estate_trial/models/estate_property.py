@@ -19,5 +19,6 @@ class Property(models.Model):
     garage=fields.Boolean(string='Garage')
     garden_area = fields.Integer(string='Garden area (sqm)')
     status = fields.Selection([('new','New'),('received','Received'),('accepted','Accepted'),('sold','Sold'),('canceled','Canceled')],required=True)
-
-'New, Offer Received, Offer Accepted, Sold and Canceled.'
+    property_type_id= fields.Many2one('estate.property.type')
+    salesman= fields.Many2one('res.partner',string="Salesman")
+    buyer= fields.Many2one('res.partner',string="Buyer")

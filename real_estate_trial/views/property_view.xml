@@ -14,7 +14,6 @@
                 <filter name="filter_available" domain="[('status', '!=', 'sold'), ('status', '!=', 'canceled')]"
                         string="Available"/>
                 <filter name="group_postcode" string="postcode" context="{'group_by': 'post_code'}"/>
-
             </search>
         </field>
     </record>
@@ -39,18 +38,27 @@
         <field name="arch" type="xml">
             <form string="properties form">
                 <sheet>
-                    <group>
-                        <group>
 
-                            <field name="title"/>
-                            <field name="description"/>
+                    <group>
+                        <field name="title" style="font-size: 22px; font-weight: bold; margin-bottom:12px"/>
+                        <group>
+                            <group>
+                                <field name="property_type_id"/>
+                                <field name="post_code"/>
+                                <field name="available_form"/>
+                            </group>
+                            <group>
+                                <field name="expected_price"/>
+                                <field name="sell_price"/>
+                            </group>
+
+
                         </group>
                         <notebook>
                             <page string="Description">
                                 <group>
                                     <group>
-                                        <field name="post_code"/>
-                                        <field name="expected_price"/>
+                                        <field name="description"/>
                                         <field name="bedrooms"/>
                                         <field name="facades"/>
                                         <field name="garden"/>
@@ -59,8 +67,6 @@
                                     </group>
 
                                     <group>
-                                        <field name="available_form"/>
-                                        <field name="sell_price"/>
                                         <field name="living_area"/>
                                         <field name="garage"/>
                                         <field name="garden_area"/>
@@ -68,6 +74,13 @@
                                         <field name="status"/>
                                     </group>
                                 </group>
+                            </page>
+                            <page string="Other Info">
+                                <group>
+                                    <field name="salesman"/>
+                                    <field name="buyer"/>
+                                </group>
+
                             </page>
                         </notebook>
                     </group>

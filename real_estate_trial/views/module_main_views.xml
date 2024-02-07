@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record model="ir.actions.act_window" id="property_tag_action">
+        <field name="name">property_tag</field>
+        <field name="res_model">estate.property.tag</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Enter first property tag</p>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="property_type_action">
+        <field name="name">property_type</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Enter first property type</p>
+        </field>
+    </record>
     <record model="ir.actions.act_window" id="property_action">
         <field name="name">property</field>
         <field name="res_model">estate.property</field>
@@ -10,8 +26,10 @@
     </record>
 
     <menuitem id="main_estate_menu" name="Real Estate"/>
-    <menuitem id="estate_menu" name="Real estate menu" parent="main_estate_menu"/>
-    <menuitem id="estate_detailed_menu" name="Estate sub menu " parent="estate_menu"/>
-    <menuitem id="property_menu" name="Property" parent="estate_detailed_menu" action="property_action"/>
+    <menuitem id="estate_menu" name="Advertisements" parent="main_estate_menu"/>
+    <menuitem id="property_menu" name="Property" parent="estate_menu" action="property_action"/>
+    <menuitem id="property_menu_setting" name="Setting" parent="main_estate_menu"/>
+    <menuitem id="property_menu_type" name="property type" parent="property_menu_setting" action="property_type_action"/>
+    <menuitem id="property_menu_tag" name="property tag" parent="property_menu_setting" action="property_tag_action"/>
 </odoo>
 
