@@ -7,9 +7,11 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="price"/>
-                    <field name="status"/>
                     <field name="partner_id"/>
+                    <field name="validity"/>
+                    <field name="date_deadline"/>
                     <field name="property_id"/>
+                    <field name="status"/>
                 </tree>
             </field>
         </record>
@@ -22,12 +24,16 @@
                     <sheet>
                         <group>
                             <group>
+                                <field name="partner_id"/>
+                                <field name="property_id"/>
+                            </group>
+                            <group>
                                 <field name="price"/>
                                 <field name="status"/>
                             </group>
                             <group>
-                                <field name="partner_id"/>
-                                <field name="property_id"/>
+                                <field name="validity"/>
+                                <field name="date_deadline"/>
                             </group>
                         </group>
                     </sheet>
@@ -44,6 +50,8 @@
                     <field name="status"/>
                     <field name="partner_id"/>
                     <field name="property_id"/>
+                    <field name="validity"/>
+                    <field name="date_deadline"/>
                 </search>
             </field>
         </record>
