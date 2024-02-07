@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 from odoo import models, fields, api
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -20,13 +22,13 @@ class EstateProperty(models.Model):
     garage = fields.Boolean()
     garden = fields.Boolean()
     garden_area = fields.Integer(string="Garden Area(sqm)")
-    total_area = fields.Integer(readonly=True, compute="_compute_total_area", store=True)
     garden_orientation = fields.Selection([
         ("north", "North"),
         ("south", "South"),
         ("east", "East"),
         ("west", "West"),
-    ], default="north")
+    ])
+    total_area = fields.Integer(readonly=True, compute="_compute_total_area", store=True)
     active = fields.Boolean(default=True)
     state = fields.Selection([
         ("new", "New"),
@@ -56,3 +58,9 @@ class EstateProperty(models.Model):
             else:
                 rec.best_offer = 0
 
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        for rec in self:
+            if not rec.garden:
+                rec.garden_area = 0
+                rec.garden_orientation = False
