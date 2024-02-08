@@ -17,7 +17,7 @@ class EstateProperty(models.Model):
         ('draft', 'Draft'),
         ('canceled', 'Canceled'),
     ], string='Statsu')
-    property_tag_id = fields.Many2many('estate.property.tags', string="Property Type")
+    property_tag_id = fields.Many2many('estate.property.tags', string="Property Tag")
     property_type_id = fields.Many2one('estate.property.type', string="Property Type")
     postcode = fields.Char(string='Postcode', size=20)
     buyer_id = fields.Many2one('res.partner', string="Buyer")
