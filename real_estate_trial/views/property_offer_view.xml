@@ -26,9 +26,7 @@
                         <field name="deadline"/>
                         <field name="status"/>
                     </group>
-
                 </sheet>
-
             </form>
         </field>
     </record>

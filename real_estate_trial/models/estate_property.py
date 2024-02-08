@@ -11,25 +11,25 @@ class Property(models.Model):
     bedrooms = fields.Integer(string='Bedrooms', default=2, required=True)
     facades = fields.Integer(string='Facades')
     garden = fields.Boolean(string='Garden')
+    garage = fields.Boolean(string='Garage')
 
-    garden_orien = fields.Selection([('west', "West"), ('east', 'East'), ('north', 'North'), ('south', "South")],compute='_compute_graden_defaults', readonly=False)
-    status = fields.Selection([('new', 'New'), ('received', 'Received'), ('accepted', 'Accepted'), ('sold', 'Sold'),('canceled', 'Canceled')], required=True)
+    garden_orien = fields.Selection([('west', "West"), ('east', 'East'), ('north', 'North'), ('south', "South")],
+                                    compute='_compute_graden_defaults', readonly=False)
+    status = fields.Selection([('new', 'New'), ('received', 'Received'), ('accepted', 'Accepted'), ('sold', 'Sold'),
+                               ('canceled', 'Canceled')], required=True)
 
     active = fields.Boolean(string='Active')
     available_form = fields.Date(string='Available from', copy=False, default=fields.Datetime.now)
 
-    #price fields
+    # price fields
     expected_price = fields.Float(string='Expected price')
-    best_offer = fields.Float(string='Best offer',compute='_compute_best_offer')
+    best_offer = fields.Float(string='Best offer', compute='_compute_best_offer')
     sell_price = fields.Float('Selling price', copy=False)
-
-    garage = fields.Boolean(string='Garage')
 
     # area fields
     living_area = fields.Integer(string='Living area (sqm)')
     garden_area = fields.Integer(string='Garden area (sqm)', compute='_compute_graden_defaults', readonly=False)
     total_area = fields.Integer(compute='_compute_total_area', string='Total area (sqm)', readonly=True)
-
 
     # related fields
     property_type_id = fields.Many2one('estate.property.type')
@@ -38,6 +38,8 @@ class Property(models.Model):
     salesman = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True,
                                default=lambda self: self.env.user)
     buyer = fields.Many2one('res.partner', string="Buyer", copy=False)
+
+    state = fields.Selection([('sold', 'Sold'), ('cancel', 'Cancel')])
 
     @api.onchange('living_area', 'garden_area')
     def _compute_total_area(self):
@@ -61,3 +63,19 @@ class Property(models.Model):
 
         if len(price_list) != 0:
             self.best_offer = max(price_list)
+
+    def action_property_sold(self):
+        for rec in self:
+            if rec.state == 'cancel':
+                return;
+            else:
+                rec.state = 'sold'
+                return;
+
+    def action_property_cancel(self):
+        for rec in self:
+            if rec.state == 'sold':
+                return;
+            else:
+                rec.state = 'cancel'
+                return;
