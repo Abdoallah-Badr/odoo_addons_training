@@ -1,4 +1,3 @@
-from typing import Dict, List
 
 from odoo import models, fields, api
 from datetime import datetime
@@ -39,8 +38,8 @@ class EstateProperty(models.Model):
     ], default="new")
     property_type_id = fields.Many2one("estate.property.type", strting="Type Of Property")
 
-    buyer = fields.Many2one('res.users')
-    salesman = fields.Many2one('res.partner')
+    buyer = fields.Many2one('res.partner')
+    salesman = fields.Many2one('res.user')
     tag_ads = fields.Many2many('estate.property.tag', string="Tags")
     offer_ids = fields.One2many("estate.property.offer", "property_id")
     best_offer = fields.Float(compute="_compute_best_offer", store=True)
