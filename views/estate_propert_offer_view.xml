@@ -15,7 +15,7 @@
                             icon="fa-check"/>
                     <button name="set_refused" string="Refused" type="object"
                             icon="fa-times"/>
-                    <field name="states"/>
+                    <field name="status"/>
                 </tree>
             </field>
         </record>
@@ -39,7 +39,7 @@
                                     <button name="set_refused" string="Refused" type="object"
                                             icon="fa-times"/>
                                 </div>
-                                <field name="states"/>
+                                <field name="status"/>
                             </group>
                             <group>
                                 <field name="validity"/>
@@ -57,7 +57,7 @@
             <field name="arch" type="xml">
                 <search>
                     <field name="price"/>
-                    <field name="states"/>
+                    <field name="status"/>
                     <field name="partner_id"/>
                     <field name="property_id"/>
                     <field name="validity"/>

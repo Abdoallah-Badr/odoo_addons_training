@@ -8,12 +8,12 @@ class EstatePropertyOffer(models.Model):
     _description = "Estate Property Offer"
 
     price = fields.Float()
-    states = fields.Selection([
+    status = fields.Selection([
         ("accepted", "Accepted"),
         ("refused", "Refused"),
     ], copy=False)
-    partner_id = fields.Many2one('res.partner', string="Partner")
-    property_id = fields.Many2one('estate.property', string="Property")
+    partner_id = fields.Many2one('res.partner', string="Partner", required=True)
+    property_id = fields.Many2one('estate.property', string="Property", required=True)
     validity = fields.Integer(default=7, string="Validity(Day)")
     date_deadline = fields.Datetime(compute="_compute_date_deadline", string="Deadline",
                                     inverse="_inverse_date_deadline", store=True)
@@ -30,10 +30,10 @@ class EstatePropertyOffer(models.Model):
 
     def set_accepted(self):
         for rec in self:
-            rec.states = "accepted"
+            rec.status = "accepted"
             rec.property_id.selling_price = rec.price
             rec.property_id.buyer = rec.partner_id.id
 
     def set_refused(self):
         for rec in self:
-            rec.states = "refused"
+            rec.status = "refused"

@@ -1,7 +1,8 @@
-
 from odoo import models, fields, api
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+
+from odoo.exceptions import UserError
 
 
 class EstateProperty(models.Model):
@@ -19,7 +20,7 @@ class EstateProperty(models.Model):
     living_area = fields.Integer(string="Living Area(sqm)")
     facades = fields.Integer()
     garage = fields.Boolean()
-    garden = fields.Boolean()
+    garden = fields.Boolean(default=True)
     garden_area = fields.Integer(string="Garden Area(sqm)")
     garden_orientation = fields.Selection([
         ("north", "North"),
@@ -36,10 +37,10 @@ class EstateProperty(models.Model):
         ("sold", "Sold"),
         ("canceled", "Canceled"),
     ], default="new")
-    property_type_id = fields.Many2one("estate.property.type", strting="Type Of Property")
+    property_type_id = fields.Many2one("estate.property.type", string="Type Of Property")
 
-    buyer = fields.Many2one('res.partner')
-    salesman = fields.Many2one('res.user')
+    buyer = fields.Many2one('res.partner', readonly=True)
+    salesman = fields.Many2one('res.users')
     tag_ads = fields.Many2many('estate.property.tag', string="Tags")
     offer_ids = fields.One2many("estate.property.offer", "property_id")
     best_offer = fields.Float(compute="_compute_best_offer", store=True)
@@ -60,6 +61,24 @@ class EstateProperty(models.Model):
     @api.onchange("garden")
     def _onchange_garden(self):
         for rec in self:
-            if not rec.garden:
+            if rec.garden is False:
                 rec.garden_area = 0
                 rec.garden_orientation = False
+
+    def set_sold_action(self):
+        for rec in self:
+            if rec.state == "canceled":
+                raise UserError("Canceled Property Cannot Sold")
+            else:
+                rec.state = "sold"
+
+    def set_canceled_action(self):
+        for rec in self:
+            if rec.state == "sold":
+                raise UserError("Sold Property Cannot Canceled")
+            else:
+                rec.state = "canceled"
+
+    def set_force_action(self):
+        for rec in self:
+            rec.state = "new"
