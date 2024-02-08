@@ -40,8 +40,11 @@
                 <sheet>
 
                     <group>
-                        <field name="title" style="font-size: 22px; font-weight: bold; margin-bottom:12px"/>
+
                         <group>
+                            <field name="title" style="font-size: 22px; font-weight: bold; margin-bottom:12px"/>
+
+                            <field name="property_tag_ids" widget="many2many_tags"/>
                             <group>
                                 <field name="property_type_id"/>
                                 <field name="post_code"/>
@@ -75,12 +78,16 @@
                                     </group>
                                 </group>
                             </page>
-                            <page string="Other Info">
+                            <page string="Offers">
+                                <group>
+                                    <field name="offer_ids"/>
+                                </group>
+                            </page>
+                             <page string="Other Info">
                                 <group>
                                     <field name="salesman"/>
                                     <field name="buyer"/>
                                 </group>
-
                             </page>
                         </notebook>
                     </group>

@@ -19,6 +19,10 @@ class Property(models.Model):
     garage=fields.Boolean(string='Garage')
     garden_area = fields.Integer(string='Garden area (sqm)')
     status = fields.Selection([('new','New'),('received','Received'),('accepted','Accepted'),('sold','Sold'),('canceled','Canceled')],required=True)
+
+    # related fields
     property_type_id= fields.Many2one('estate.property.type')
-    salesman= fields.Many2one('res.partner',string="Salesman")
-    buyer= fields.Many2one('res.partner',string="Buyer")
+    property_tag_ids = fields.Many2many('estate.property.tag')
+    offer_ids=fields.One2many('estate.property.offer','property_id',string=' ')
+    salesman= fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
+    buyer= fields.Many2one('res.partner',string="Buyer",copy=True)
