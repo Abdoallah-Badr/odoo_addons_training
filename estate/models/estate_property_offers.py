@@ -7,6 +7,7 @@ from odoo import models, fields, api, _, exceptions
 class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
     _description = '.....'
+    _order = "price desc"
 
     price = fields.Integer(string='Price', requried=True)
     state = fields.Selection([
@@ -67,6 +68,7 @@ class EstatePropertyOffer(models.Model):
             offer.state = 'accepted'
             offer.property_id.selling_price = offer.price
             offer.property_id.buyer_id = offer.buyer_id.id
+            offer.property_id.status = 'sold'
             print('offer.property_id.buyer_id=====>',offer.property_id.buyer_id)
             print('buyer_id.id=====>',offer.buyer_id.id)
             print('buyer_id=====>',offer.buyer_id)

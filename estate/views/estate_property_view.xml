@@ -6,9 +6,16 @@
         <field name='arch' type="xml">
             <form delete="0">
                 <header>
-        <button name="cancel_property" type="object" string="Cancel"/>
-        <button name="confirm_sale" type="object" string="Do Something"/>
-    </header>
+                        <field name="status"
+                               widget="statusbar"
+                               nolabel="1"
+                               options="{'clickable':'1'}"
+                               statusbar_visible="new,offer_recived,offer_accepted,sold"/>
+                    </header>
+                <header>
+<!--                    <button name="cancel_property" type="object" string="Cancel"/>-->
+<!--                    <button name="confirm_sale" type="object" string="Do Something"/>-->
+                </header>
                 <sheet>
                     <div class="on_title">
                         <label for="name"/>
@@ -20,7 +27,7 @@
 
                         <group>
                             <!--                            <button name="action_test" string="object Button"  type="object" class="oe_highlight"/>-->
-                            <field name="status" />
+<!--                            <field name="status"/>-->
                             <field name="property_tag_id" widget="many2many_tags"/>
                             <field name="property_type_id"/>
                             <field name="postcode"/>
@@ -52,6 +59,9 @@
                         <page string="offers" name="Offers">
                             <group>
                                 <field name="offer_ids"/>
+                                    <tree>
+
+                                    </tree>
                             </group>
                         </page>
                         <page string="other_info" name="Other Info">

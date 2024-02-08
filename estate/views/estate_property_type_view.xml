@@ -8,11 +8,16 @@
                 <sheet>
                     <group>
                         <field name="name"/>
+                        <field name="property_ids">
+                            <tree editable="bottom" string="Tags">
+                                <field name="name" />
+                                <field name="expected_price"/>
+                                <field name="status"/>
+                            </tree>
+                        </field>
                     </group>
-                    <notebook>
-                    </notebook>
-
                 </sheet>
+
             </form>
         </field>
     </record>
@@ -21,7 +26,15 @@
         <field name='model'>estate.property.type</field>
         <field name='arch' type="xml">
             <tree>
-                 <field name="name"/>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="property_ids">
+                    <tree editable="bottom"  string="Tags">
+                        <field name="name" widget="handle"/>
+                        <field name="expected_price"/>
+                        <field name="status"/>
+                    </tree>
+                </field>
             </tree>
         </field>
     </record>
@@ -31,7 +44,7 @@
         <field name='model'>estate.property.type</field>
         <field name='arch' type="xml">
             <search>
-                 <field name="name"/>
+                <field name="name"/>
             </search>
         </field>
     </record>

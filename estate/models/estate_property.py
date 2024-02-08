@@ -6,9 +6,17 @@ from odoo.exceptions import ValidationError
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'EstatePropertyDescription'
+    _order = "id desc"
 
     name = fields.Char(required=True, size=20, string='Title')
-    status = fields.Selection([('canceled', 'Canceled'), ('new', 'New'), ('sold', 'Sold')], string='Statsu')
+    status = fields.Selection([
+        ('new', 'New'),
+        ('offer_recived', 'OFFER RECIVED'),
+        ('offer_accepted', 'OFFER ACCEPTED'),
+        ('sold', 'Sold'),
+        ('draft', 'Draft'),
+        ('canceled', 'Canceled'),
+    ], string='Statsu')
     property_tag_id = fields.Many2many('estate.property.tags', string="Property Type")
     property_type_id = fields.Many2one('estate.property.type', string="Property Type")
     postcode = fields.Char(string='Postcode', size=20)
@@ -35,6 +43,7 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(string='Total Area', compute='_compute_total_area')
     offer_ids = fields.One2many('estate.property.offer', 'property_id')
     best_price = fields.Float(string='Best Price', compute='_compute_best_price', store=True, default=0)
+    type_id = fields.Many2one('estate.property.type', string='Offers Type')
 
     _sql_constraints = [
         ('check_price', 'CHECK(expected_price > 0 AND selling_price > 0 )',
