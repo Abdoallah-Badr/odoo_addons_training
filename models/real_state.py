@@ -2,14 +2,16 @@ from odoo import models, fields, api
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Estate Property"
+    _order = "id desc"
 
     name = fields.Char(required=True)
+    sequence = fields.Integer()
     description = fields.Text()
     postcode = fields.Char()
     date_availability = fields.Date(string="Availability",
@@ -44,6 +46,12 @@ class EstateProperty(models.Model):
     tag_ads = fields.Many2many('estate.property.tag', string="Tags")
     offer_ids = fields.One2many("estate.property.offer", "property_id")
     best_offer = fields.Float(compute="_compute_best_offer", store=True)
+
+    @api.constrains("expected_price")
+    def positive_expected_price(self):
+        for rec in self:
+            if rec.expected_price <= 0:
+                raise ValidationError("The Expected Price should be positive")
 
     @api.depends("garden_area", "living_area")
     def _compute_total_area(self):

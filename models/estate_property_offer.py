@@ -1,11 +1,13 @@
 from datetime import timedelta
 
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Estate Property Offer"
+    _order = "price desc"
 
     price = fields.Float()
     status = fields.Selection([
@@ -19,6 +21,12 @@ class EstatePropertyOffer(models.Model):
                                     inverse="_inverse_date_deadline", store=True)
     create_date = fields.Datetime(string="Create Date", default=fields.Datetime.now, readonly=True)
 
+    @api.constrains("price")
+    def positive_price(self):
+        for rec in self:
+            if rec.price <= 0:
+                raise ValidationError("The Selling Price should be positive")
+
     @api.depends("validity", "create_date")
     def _compute_date_deadline(self):
         for rec in self:
@@ -30,9 +38,13 @@ class EstatePropertyOffer(models.Model):
 
     def set_accepted(self):
         for rec in self:
-            rec.status = "accepted"
-            rec.property_id.selling_price = rec.price
-            rec.property_id.buyer = rec.partner_id.id
+            if rec.price >= rec.property_id.expected_price * 0.9:
+                print(rec.price)
+                rec.status = "accepted"
+                rec.property_id.selling_price = rec.price
+                rec.property_id.buyer = rec.partner_id.id
+            else:
+                raise ValidationError("the selling price cannot be lower than 90% of the expected price.")
 
     def set_refused(self):
         for rec in self:
