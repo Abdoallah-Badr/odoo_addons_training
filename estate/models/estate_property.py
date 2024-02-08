@@ -7,7 +7,7 @@ class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'EstatePropertyDescription'
 
-    name = fields.Char(string='Title', requried=True, size=20)
+    name = fields.Char(required=True, size=20, string='Title')
     status = fields.Selection([('canceled', 'Canceled'), ('new', 'New'), ('sold', 'Sold')], string='Statsu')
     property_tag_id = fields.Many2many('estate.property.tags', string="Property Type")
     property_type_id = fields.Many2one('estate.property.type', string="Property Type")
@@ -16,7 +16,7 @@ class EstateProperty(models.Model):
     seller_id = fields.Many2one('res.partner', string="Seller")
     description = fields.Text(string='Description')
     date_availability = fields.Date(string='Date Aavailability')
-    expected_price = fields.Float(string='Expected Price', required=True)
+    expected_price = fields.Float(required=True, string='Expected Price', )
     # best_price = fields.Float(string='Best Price', required=True)
     selling_price = fields.Float(string='Selling Price')
     bedrooms = fields.Integer(string='bedrooms')
@@ -35,6 +35,12 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(string='Total Area', compute='_compute_total_area')
     offer_ids = fields.One2many('estate.property.offer', 'property_id')
     best_price = fields.Float(string='Best Price', compute='_compute_best_price', store=True, default=0)
+
+    _sql_constraints = [
+        ('check_price', 'CHECK(expected_price > 0 AND selling_price > 0 )',
+         'Price must be greater than zero.'),
+        ('property_name_must_unique', 'unique(name)', 'Property name already exists')
+    ]
 
     def _compute_total_area(self):
         for rec in self:
@@ -78,26 +84,25 @@ class EstateProperty(models.Model):
             }
         }
 
-
     def confirm_sale(self):
         for record in self:
             if record.status == 'canceled':
                 raise exceptions.UserError("Cannot confirm sale for a canceled item.")
             else:
-                record.status='sold'
+                record.status = 'sold'
 
     @api.depends('')
     def confirm_price(self):
         for rec in self:
-            if rec.offer_ids.status=='accepted':
-                rec.selling_price=rec.offer_ids.price
+            if rec.offer_ids.status == 'accepted':
+                rec.selling_price = rec.offer_ids.price
             else:
-                rec.selling_price=0
+                rec.selling_price = 0
 
     def accept_offer(self):
         searched = self.env['estate.property'].search([])
         for rec in self:
-            mapped=rec.offer_ids.mapped('status')
+            mapped = rec.offer_ids.mapped('status')
             if 'accepted' in mapped:
                 print()
 
@@ -108,3 +113,9 @@ class EstateProperty(models.Model):
         # # else:
         # #     for rec in self:
         # #         rec.status='accepted'
+
+    @api.constrains('expected_price', 'selling_price')
+    def _check_selling_price(self):
+        for rec in self:
+            if rec.selling_price < 0.9 * rec.expected_price:
+                raise ValidationError("Selling price cannot be lower than 90% of the expected price.")
