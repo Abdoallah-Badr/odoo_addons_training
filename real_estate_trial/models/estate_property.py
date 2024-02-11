@@ -1,9 +1,11 @@
-from odoo import fields, models, api
-
+from odoo import fields, models, api,_
+from odoo.exceptions import UserError
+from num2words import num2words
 
 class Property(models.Model):
     _name = 'estate.property'
     _description = 'property model for estate module'
+    _rec_name="title"
 
     title = fields.Char(string='Title', required=True)
     description = fields.Text(string='Description', required=True)
@@ -23,8 +25,9 @@ class Property(models.Model):
 
     # price fields
     expected_price = fields.Float(string='Expected price')
-    best_offer = fields.Float(string='Best offer', compute='_compute_best_offer')
+    best_offer = fields.Float(string='Best offer', compute='_compute_best_offer' ,default=0)
     sell_price = fields.Float('Selling price', copy=False)
+    sell_price_inwords= fields.Char('price in words',compute='_compute_amount_to_words')
 
     # area fields
     living_area = fields.Integer(string='Living area (sqm)')
@@ -35,10 +38,9 @@ class Property(models.Model):
     property_type_id = fields.Many2one('estate.property.type')
     property_tag_ids = fields.Many2many('estate.property.tag')
     offer_ids = fields.One2many('estate.property.offer', 'property_id', string=' ')
-    salesman = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True,
-                               default=lambda self: self.env.user)
-    buyer = fields.Many2one('res.partner', string="Buyer", copy=False)
+    salesman = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True,default=lambda self: self.env.user)
 
+    buyer = fields.Many2one('res.partner', string="Buyer", copy=False)
     state = fields.Selection([('sold', 'Sold'), ('cancel', 'Cancel')])
 
     @api.onchange('living_area', 'garden_area')
@@ -63,19 +65,28 @@ class Property(models.Model):
 
         if len(price_list) != 0:
             self.best_offer = max(price_list)
+        else:
+            self.best_offer = 0
+    @api.onchange('sell_price')
+    def _compute_amount_to_words(self):
+        res_currency=self.env.user.company_id.currency_id
+        for rec in self:
+            rec.sell_price_inwords=res_currency.amount_to_text(rec.sell_price)
 
     def action_property_sold(self):
         for rec in self:
             if rec.state == 'cancel':
-                return;
+                raise UserError("Canceled properties can't be sold")
             else:
                 rec.state = 'sold'
-                return;
+                rec.status = 'sold'
+                return
+
 
     def action_property_cancel(self):
         for rec in self:
-            if rec.state == 'sold':
-                return;
-            else:
-                rec.state = 'cancel'
-                return;
+            rec.state = 'cancel'
+            rec.status = 'canceled'
+            return
+
+
