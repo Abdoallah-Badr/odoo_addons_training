@@ -9,6 +9,8 @@
                 <field name="partner_id"/>
                 <field name="validity"/>
                 <field name="deadline"/>
+                <button name="action_property_accept" type="object" string="accept" icon="fa-check"/>
+                <button name="action_property_refuse" type="object" string='refuse' icon="fa-times"/>
                 <field name="status"/>
             </tree>
         </field>
@@ -24,7 +26,6 @@
                         <field name="price"/>
                         <field name="validity"/>
                         <field name="deadline"/>
-                        <field name="status"/>
                     </group>
                 </sheet>
             </form>
