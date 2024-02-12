@@ -137,7 +137,6 @@
                     <field name="expected_price"/>
                     <field name="selling_price"/>
                     <field name="bedrooms"/>
-                    <field name="living_area"/>
                     <field name="facades"/>
                     <field name="garage"/>
                     <field name="garden"/>
@@ -150,7 +149,7 @@
                     <field name="total_area"/>
                     <separator/>
                     <filter string="Availability" name="state" domain='[("state", "in", ["new", "offer_received"])]'/>
-                    <filter string="Big Living Area(sqm)" name="living_area" domain='[("living_area", ">=", 150)]'/>
+                    <field string="Big Living Area(sqm)" name="living_area" filter_domain='[("living_area", ">=", self)]'/>
                     <group expand="1" string="Group By">
                         <filter string="postcode" name="postcode" context="{'group_by':'postcode'}"/>
                     </group>
