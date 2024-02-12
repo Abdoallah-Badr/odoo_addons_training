@@ -1,3 +1,5 @@
+from num2words import num2words
+
 from odoo import models, fields, api, _, exceptions
 from datetime import date, datetime, timedelta
 from odoo.exceptions import ValidationError
@@ -14,7 +16,6 @@ class EstateProperty(models.Model):
         ('offer_recived', 'OFFER RECIVED'),
         ('offer_accepted', 'OFFER ACCEPTED'),
         ('sold', 'Sold'),
-        ('draft', 'Draft'),
         ('canceled', 'Canceled'),
     ], string='Statsu')
     property_tag_id = fields.Many2many('estate.property.tags', string="Property Tag")
@@ -44,6 +45,11 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many('estate.property.offer', 'property_id')
     best_price = fields.Float(string='Best Price', compute='_compute_best_price', store=True, default=0)
     type_id = fields.Many2one('estate.property.type', string='Offers Type')
+    price_in_words = fields.Char(string='Price in Words', compute='_compute_price_in_words')
+
+    currency_id = fields.Many2one('res.currency', string='Currency', related='company_id.currency_id', readonly=True)
+    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+
 
     _sql_constraints = [
         ('check_price', 'CHECK(expected_price > 0 AND selling_price > 0 )',
@@ -128,3 +134,25 @@ class EstateProperty(models.Model):
         for rec in self:
             if rec.selling_price < 0.9 * rec.expected_price:
                 raise ValidationError("Selling price cannot be lower than 90% of the expected price.")
+
+    def _make_offer_readonly(self):
+        for rec in self:
+                readonly = rec.state in ['offer_accepted', 'sold', 'canceled']
+                rec.offer_ids.readonly = readonly
+
+    def write(self, vals):
+        # Prevent modification of many2one_field after record creation
+        if 'property_type_id' in vals:
+            print(vals)
+            raise ValidationError("You cannot modify the Many2one field after record creation.")
+        return super(EstateProperty, self).write(vals)
+
+    @api.depends('selling_price', 'currency_id')
+    def _compute_price_in_words(self):
+        for record in self:
+            if record.selling_price:
+                currency_name = record.currency_id.name or ''
+                price_in_words = num2words(record.selling_price, lang='en').title()
+                record.price_in_words = f'{price_in_words} {currency_name}'
+            else:
+                record.price_in_words = ''

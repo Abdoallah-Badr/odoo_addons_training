@@ -11,11 +11,12 @@
                         <field name="state"/>
                         <field name="buyer_id"/>
                         <field name="seller_id"/>
+                        <field name="state_id"/>
                         <field name="property_id" required="1"/>
                         <button name="accept_offer" string="Accept Offer" type="object" class="btn-primary"
-                                icon="fa fa-check"/>
+                                icon="fa fa-check" invisible="state!='draft'"/>
                         <button name="refuse_offer" string="Refuse Offer" type="object" class="btn-danger"
-                                icon="fa fa-times"/>
+                                icon="fa fa-times" invisible="state!='draft'" />
 
                     </group>
                     <notebook>
@@ -38,9 +39,9 @@
                 <field name="validity"/>
                 <field name="date_deadline"/>
                 <button name="accept_offer" string="Accept Offer" type="object" class="btn-primary"
-                        icon="fa-check"/>
+                        icon="fa-check" invisible="state!='draft'"/>
                 <button name="refuse_offer" string="Refuse Offer" type="object" class="btn-danger"
-                        icon="fa-times"/>
+                        icon="fa-times" invisible="state!='draft'"/>
 
             </tree>
         </field>

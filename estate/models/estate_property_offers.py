@@ -83,3 +83,12 @@ class EstatePropertyOffer(models.Model):
         ('check_offer_price', 'CHECK(price > 0 )',
          'Price must be greater than zero.'),
     ]
+    state_id = fields.Boolean(string='Status id')
+
+    @api.onchange('state')
+    def _state(self):
+        if self.state and self.state == 'draft':
+            self.state_id = False
+        else:
+            self.state_id = True
+

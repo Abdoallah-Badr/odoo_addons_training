@@ -29,7 +29,7 @@
                             <!--                            <button name="action_test" string="object Button"  type="object" class="oe_highlight"/>-->
 <!--                            <field name="status"/>-->
                             <field name="property_tag_id" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                            <field name="property_type_id"  options="{'no_create_edit=True'}" />
+                            <field name="property_type_id"   options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" />
                             <field name="postcode"/>
                             <field name="date_availability"/>
 
@@ -39,6 +39,8 @@
                             <field name="expected_price"/>
                             <field name="best_price"/>
                             <field name="selling_price"/>
+                            <field name="price_in_words"/>
+
                         </group>
                     </group>
 
@@ -47,12 +49,12 @@
                             <group>
                                 <field name="description" placeholder="Enter your Deescription"/>
                                 <field name="living_area"/>
-                                <field name="gardens_area"/>
+                                <field name="gardens_area" invisible="not garden" />
                                 <field name="bedrooms"/>
                                 <field name="facades"/>
                                 <field name="garage"/>
                                 <field name="garden"/>
-                                <field name="garden_orientation"/>
+                                <field name="garden_orientation" invisible="not garden"/>
                                 <field name="total_area"/>
                             </group>
                         </page>
