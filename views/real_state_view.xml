@@ -132,7 +132,6 @@
                 <search>
                     <field name="name"/>
                     <field name="postcode"/>
-                    <field name="tag_ads"/>
                     <field name="date_availability"/>
                     <field name="expected_price"/>
                     <field name="selling_price"/>
@@ -143,9 +142,6 @@
                     <field name="garden_area"/>
                     <field name="garden_orientation"/>
                     <field name="description"/>
-                    <field name="buyer"/>
-                    <field name="salesman"/>
-                    <field name="property_type_id"/>
                     <field name="total_area"/>
                     <separator/>
                     <filter string="Availability" name="state" domain='[("state", "in", ["new", "offer_received"])]'/>
