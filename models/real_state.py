@@ -1,7 +1,6 @@
 from odoo import models, fields, api
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -17,6 +16,8 @@ class EstateProperty(models.Model):
     date_availability = fields.Date(string="Availability",
                                     default=lambda self: (datetime.now() + relativedelta(months=3)).date())
     expected_price = fields.Float(required=True, copy=False)
+    expected_price_word = fields.Char(readonly=True, compute="_compute_expected_price_word", store=True,
+                                      string="Price By Words")
     selling_price = fields.Float(readonly=True)
     bedrooms = fields.Integer(default=2)
     living_area = fields.Integer(string="Living Area(sqm)")
@@ -90,3 +91,9 @@ class EstateProperty(models.Model):
     def set_force_action(self):
         for rec in self:
             rec.state = "new"
+
+    @api.depends("expected_price")
+    def _compute_expected_price_word(self):
+        for rec in self:
+            currency = rec.env.company.currency_id
+            rec.expected_price_word = currency.amount_to_text(rec.expected_price)

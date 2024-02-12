@@ -36,7 +36,7 @@
             id="properties_offer"
             name="Offer"
             parent="properties_menu"
-            action="real_state.offer_action"
+            action="real_state.offer_actions"
     />
 
 </odoo>

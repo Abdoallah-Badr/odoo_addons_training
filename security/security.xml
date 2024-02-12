@@ -1,7 +1,7 @@
 <odoo>
-    <record id="property_group_user" model="res.groups">
+    <record id="property_manager_group" model="res.groups">
         <field name="name">Officer: Manage all properties</field>
 <!--        <field name="category_id" ref="base.module_category_human_resources_fleet"/>-->
-        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+<!--        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
     </record>
 </odoo>

@@ -1,16 +1,19 @@
 <odoo>
     <data>
-
         <record id="properties_tree_view" model="ir.ui.view">
             <field name="name">properties tree</field>
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree decoration-success="state == 'offer_accepted' or state == 'offer_received'"
+                      decoration-muted="state == 'sold'"
+                      decoration-bf="state == 'offer_accepted'"
+                      decoration-info="state == 'new'">
+                    <field name="state" column_invisible="1"/>
                     <field name="name"/>
                     <field name="postcode"/>
-                    <field name="tag_ads" />
-                    <field name="date_availability" />
-                    <field name="expected_price" />
+                    <field name="tag_ads"/>
+                    <field name="date_availability"/>
+                    <field name="expected_price"/>
                     <field name="selling_price" optional="1"/>
                     <field name="bedrooms" optional="1"/>
                     <field name="living_area" optional="1"/>
@@ -41,7 +44,8 @@
                                     type="object" class="btn btn-secondary"/>
                             <button name="set_force_action" string="Force New"
                                     type="object" class="btn btn-danger"/>
-                            <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
+                            <field name="state" widget="statusbar"
+                                   statusbar_visible="new,offer_received,offer_accepted,sold"/>
                         </header>
                         <div class="oe_title">
                             <label for="name"/>
@@ -51,17 +55,19 @@
                         </div>
                         <div lass="oe_title">
                             <h3>
-                                <field name="tag_ads" widget="many2many_tags" options="{'color_field': 'color'}" />
+                                <field name="tag_ads" widget="many2many_tags" options="{'color_field': 'color'}"/>
                             </h3>
                         </div>
                         <group>
                             <group>
-                                <field name="property_type_id" options="{'no_create': True}"/>
+                                <field name="property_type_id" options="{'no_create': True,'no_open': True}"/>
+                                <field name="state"/>
                                 <field name="postcode"/>
                                 <field name="date_availability"/>
                             </group>
                             <group>
                                 <field name="expected_price"/>
+                                <field name="expected_price_word"/>
                                 <field name="best_offer"/>
                                 <field name="selling_price"/>
                             </group>
@@ -89,7 +95,23 @@
                                 </group>
                             </page>
                             <page string="Offer">
-                                <field name="offer_ids"/>
+                                <field name="offer_ids">
+                                    <tree editable="bottom" decoration-success="status == 'accepted'"
+                                          decoration-danger="status == 'refused'">
+                                        <field name="price"/>
+                                        <field name="partner_id"/>
+                                        <field name="validity"/>
+                                        <field name="date_deadline"/>
+                                        <field name="property_id"/>
+                                        <button name="set_accepted" string="Accept" type="object"
+                                                icon="fa-check"
+                                                invisible="parent.state == 'offer_accepted' or status == 'refused'"/>
+                                        <button name="set_refused" string="Refused" type="object"
+                                                icon="fa-times"
+                                                invisible="parent.state == 'offer_accepted' or status == 'refused'"/>
+                                        <field name="status"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page string="Other Info">
                                 <group>
@@ -128,6 +150,7 @@
                     <field name="total_area"/>
                     <separator/>
                     <filter string="Availability" name="state" domain='[("state", "in", ["new", "offer_received"])]'/>
+                    <filter string="Big Living Area(sqm)" name="living_area" domain='[("living_area", ">=", 150)]'/>
                     <group expand="1" string="Group By">
                         <filter string="postcode" name="postcode" context="{'group_by':'postcode'}"/>
                     </group>
@@ -139,6 +162,7 @@
             <field name="name">Properties</field>
             <field name="res_model">estate.property</field>
             <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_state' : 1}</field>
         </record>
     </data>
 </odoo>

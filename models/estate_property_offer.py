@@ -20,6 +20,7 @@ class EstatePropertyOffer(models.Model):
     date_deadline = fields.Datetime(compute="_compute_date_deadline", string="Deadline",
                                     inverse="_inverse_date_deadline", store=True)
     create_date = fields.Datetime(string="Create Date", default=fields.Datetime.now, readonly=True)
+    property_type_id = fields.Many2one(related="property_id.property_type_id", store=True)
 
     @api.constrains("price")
     def positive_price(self):
@@ -39,13 +40,15 @@ class EstatePropertyOffer(models.Model):
     def set_accepted(self):
         for rec in self:
             if rec.price >= rec.property_id.expected_price * 0.9:
-                print(rec.price)
                 rec.status = "accepted"
                 rec.property_id.selling_price = rec.price
                 rec.property_id.buyer = rec.partner_id.id
+                rec.property_id.state = "offer_accepted"
             else:
                 raise ValidationError("the selling price cannot be lower than 90% of the expected price.")
 
     def set_refused(self):
         for rec in self:
             rec.status = "refused"
+
+    is_visible = fields.Boolean(compute='_compute_visibility', store=True, default=False)
