@@ -9,12 +9,12 @@
                         <field name="status"
                                widget="statusbar"
                                nolabel="1"
-                               options="{'clickable':'1'}"
                                statusbar_visible="new,offer_recived,offer_accepted,sold"/>
                     </header>
                 <header>
-<!--                    <button name="cancel_property" type="object" string="Cancel"/>-->
-<!--                    <button name="confirm_sale" type="object" string="Do Something"/>-->
+                    <button name="cancel_property" type="object" string="Cancel" class="oe_highlight" bg_color="#3498db"/>
+                    <button name="confirm_sale" type="object" string="Sold" class="oe_highlight" bg_color="#3498db"/>
+                    <button name="offer_recived" type="object" string="dddd" class="oe_highlight" bg_color="#3498db"/>
                 </header>
                 <sheet>
                     <div class="on_title">
@@ -54,16 +54,14 @@
                                 <field name="facades"/>
                                 <field name="garage"/>
                                 <field name="garden"/>
+                                <field name="readonly_offer"/>
                                 <field name="garden_orientation" invisible="not garden"/>
                                 <field name="total_area"/>
                             </group>
                         </page>
                         <page string="offers" name="Offers">
                             <group>
-                                <field name="offer_ids"/>
-                                    <tree>
-
-                                    </tree>
+                                <field name="offer_ids" readonly="readonly_offer"/>
                             </group>
                         </page>
                         <page string="other_info" name="Other Info">
@@ -85,7 +83,8 @@
         <field name="name">estate.property.tree</field>
         <field name='model'>estate.property</field>
         <field name='arch' type="xml">
-            <tree>
+            <tree decoration-success="status in ('offer_received', 'offer_accepted')" decoration-muted="status == 'sold'" decoration-bf="status == 'offer_accepted'">
+                <field name="status" invisible="1"/>
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="description"/>

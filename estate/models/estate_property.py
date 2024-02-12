@@ -17,7 +17,7 @@ class EstateProperty(models.Model):
         ('offer_accepted', 'OFFER ACCEPTED'),
         ('sold', 'Sold'),
         ('canceled', 'Canceled'),
-    ], string='Statsu')
+    ], string='Statsu',defautl='new')
     property_tag_id = fields.Many2many('estate.property.tags', string="Property Tag")
     property_type_id = fields.Many2one('estate.property.type', string="Property Type")
     postcode = fields.Char(string='Postcode', size=20)
@@ -83,10 +83,7 @@ class EstateProperty(models.Model):
                 rec.gardens_area = 0
                 rec.garden_orientation = ''
 
-    def action_do_something(self):
-        for record in self:
-            record.name = "Something"
-        return True
+
 
     def cancel_property(self):
         for rec in self:
@@ -106,28 +103,6 @@ class EstateProperty(models.Model):
             else:
                 record.status = 'sold'
 
-    @api.depends('')
-    def confirm_price(self):
-        for rec in self:
-            if rec.offer_ids.status == 'accepted':
-                rec.selling_price = rec.offer_ids.price
-            else:
-                rec.selling_price = 0
-
-    def accept_offer(self):
-        searched = self.env['estate.property'].search([])
-        for rec in self:
-            mapped = rec.offer_ids.mapped('status')
-            if 'accepted' in mapped:
-                print()
-
-        # mapped = searched.mapped('offer_ids')
-        # print('gj;kedgjkfdgjk;', mapped)
-        # # if 'accepted' in mapped:
-        # #     raise exceptions.UserError("Cannot accept this offer as u already accept one.")
-        # # else:
-        # #     for rec in self:
-        # #         rec.status='accepted'
 
     @api.constrains('expected_price', 'selling_price')
     def _check_selling_price(self):
@@ -156,3 +131,18 @@ class EstateProperty(models.Model):
                 record.price_in_words = f'{price_in_words} {currency_name}'
             else:
                 record.price_in_words = ''
+    @api.depends('offer_ids')
+    def offer_recived(self):
+        for rec in self:
+            if len(rec.offer_ids)>0:
+                rec.status='offer_recived'
+
+    readonly_offer=fields.Boolean(string='Readonly Offer')
+
+    @api.depends('status')
+    def _readonly_status(self):
+        for rec in self:
+            if rec.status in ('offer_accepted', 'sold', 'canceled'):
+                rec.readonly_offer=True
+            else:
+                rec.readonly_offer=False

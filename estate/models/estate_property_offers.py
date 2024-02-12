@@ -68,7 +68,7 @@ class EstatePropertyOffer(models.Model):
             offer.state = 'accepted'
             offer.property_id.selling_price = offer.price
             offer.property_id.buyer_id = offer.buyer_id.id
-            offer.property_id.status = 'sold'
+            offer.property_id.status = 'offer_accepted'
             print('offer.property_id.buyer_id=====>',offer.property_id.buyer_id)
             print('buyer_id.id=====>',offer.buyer_id.id)
             print('buyer_id=====>',offer.buyer_id)
@@ -83,12 +83,15 @@ class EstatePropertyOffer(models.Model):
         ('check_offer_price', 'CHECK(price > 0 )',
          'Price must be greater than zero.'),
     ]
-    state_id = fields.Boolean(string='Status id')
 
-    @api.onchange('state')
-    def _state(self):
-        if self.state and self.state == 'draft':
-            self.state_id = False
-        else:
-            self.state_id = True
+
+
+
+    @api.onchange('property_id.status')
+    def _onchange_property_state(self):
+        for offer in self:
+            if offer.property_id.state in ('offer_accepted', 'sold', 'canceled'):
+                offer.property_id.readonly = True
+            else:
+                offer.property_id.readonly = False
 
