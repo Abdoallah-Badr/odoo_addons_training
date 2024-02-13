@@ -23,6 +23,7 @@ class EstatePropertyOffer(models.Model):
                                 readoonly=False)
 
     property_id = fields.Many2one('estate.property',requried=True, string="Property")
+    property_type_id=fields.Many2one("estate.property.type", related='property_id.property_type_id' , string='Property Type ID' ,store=1)
 
     @api.depends('property_id')
     def _determine_seller(self):

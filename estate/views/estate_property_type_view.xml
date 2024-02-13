@@ -6,13 +6,22 @@
         <field name='arch' type="xml">
             <form delete="0">
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    <button name="%(estate.action_estate_property_offers_2)d" type="action" class="oe_stat_button" icon="fa-money">
+                                <field name="offer_count" widget="statinfo" string="Offers"/>
+                        </button>
+                    </div>
                     <group>
+
                         <field name="name"/>
+                        <field name="offer_count"/>
                         <field name="property_ids">
+
                             <tree editable="bottom" string="Tags">
-                                <field name="name" />
+                                <field name="name"/>
                                 <field name="expected_price"/>
                                 <field name="status"/>
+
                             </tree>
                         </field>
                     </group>
@@ -29,7 +38,7 @@
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="property_ids">
-                    <tree editable="bottom"  string="Tags">
+                    <tree editable="bottom" string="Tags">
                         <field name="name" widget="handle"/>
                         <field name="expected_price"/>
                         <field name="status"/>

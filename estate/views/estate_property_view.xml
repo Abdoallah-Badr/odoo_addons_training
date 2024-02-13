@@ -101,12 +101,14 @@
         <field name='model'>estate.property</field>
         <field name='arch' type="xml">
             <search>
-                <field name="name"/>
+                <field name="name" />
+                <field name="living_area" filter_domain="[('living_area','>=',self)]"/>
                 <field name="postcode"/>
-                <group expand="0" string="">
-                    <filter name="postcode_group" string="Postcode Group" context="{'group_by':'postcode'}"/>
+                <filter string="Available" name="available" domain='["|", ("status", "=", "new"), ("status", "=", "offer_recived")]'/>
+
+                <group expand="1" string="Group By">
+                    <filter string="Postcode" name='postcode' context="{'group_by':'postcode'}"/>
                 </group>
-                <filter name="garden_filter" string="Garden" domain="[('garden','=','true')]"/>
             </search>
         </field>
     </record>
@@ -116,7 +118,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{}</field>
+        <field name="context">{'search_default_available': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create your first sale!
