@@ -31,7 +31,7 @@
         <field name="name">estate.property.offer.tree</field>
         <field name='model'>estate.property.offer</field>
         <field name='arch' type="xml">
-            <tree decoration-success="state == 'accepted'" decoration-danger="state == 'refused'">
+            <tree decoration-success="state == 'accepted'" decoration-danger="state == 'refused'" >
                 <field name="price"/>
                 <field name="state"/>
                 <field name="buyer_id" />

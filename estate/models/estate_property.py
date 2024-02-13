@@ -17,7 +17,7 @@ class EstateProperty(models.Model):
         ('offer_accepted', 'OFFER ACCEPTED'),
         ('sold', 'Sold'),
         ('canceled', 'Canceled'),
-    ], string='Statsu',defautl='new')
+    ], defautl='new', string='Statsu')
     property_tag_id = fields.Many2many('estate.property.tags', string="Property Tag")
     property_type_id = fields.Many2one('estate.property.type', string="Property Type")
     postcode = fields.Char(string='Postcode', size=20)
@@ -49,7 +49,6 @@ class EstateProperty(models.Model):
 
     currency_id = fields.Many2one('res.currency', string='Currency', related='company_id.currency_id', readonly=True)
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
-
 
     _sql_constraints = [
         ('check_price', 'CHECK(expected_price > 0 AND selling_price > 0 )',
@@ -83,8 +82,6 @@ class EstateProperty(models.Model):
                 rec.gardens_area = 0
                 rec.garden_orientation = ''
 
-
-
     def cancel_property(self):
         for rec in self:
             rec.status = 'canceled'
@@ -103,7 +100,6 @@ class EstateProperty(models.Model):
             else:
                 record.status = 'sold'
 
-
     @api.constrains('expected_price', 'selling_price')
     def _check_selling_price(self):
         for rec in self:
@@ -112,8 +108,8 @@ class EstateProperty(models.Model):
 
     def _make_offer_readonly(self):
         for rec in self:
-                readonly = rec.state in ['offer_accepted', 'sold', 'canceled']
-                rec.offer_ids.readonly = readonly
+            readonly = rec.state in ['offer_accepted', 'sold', 'canceled']
+            rec.offer_ids.readonly = readonly
 
     def write(self, vals):
         # Prevent modification of many2one_field after record creation
@@ -131,18 +127,28 @@ class EstateProperty(models.Model):
                 record.price_in_words = f'{price_in_words} {currency_name}'
             else:
                 record.price_in_words = ''
-    @api.depends('offer_ids')
+
+    @api.depends('status', 'offer_ids')
     def offer_recived(self):
         for rec in self:
-            if len(rec.offer_ids)>0:
-                rec.status='offer_recived'
+            if len(rec.offer_ids) > 0:
+                rec.status = 'offer_recived'
+            else:
+                rec.status = 'new'
 
-    readonly_offer=fields.Boolean(string='Readonly Offer')
+    readonly_offer = fields.Boolean(string='Readonly Offer')
 
     @api.depends('status')
     def _readonly_status(self):
         for rec in self:
             if rec.status in ('offer_accepted', 'sold', 'canceled'):
-                rec.readonly_offer=True
+                rec.readonly_offer = True
             else:
-                rec.readonly_offer=False
+                rec.readonly_offer = False
+
+    def unlink(self):
+        for rec in self:
+            if rec.status in ('sold', 'offer_accepted','offer_recived'):
+                raise ValidationError('Only new and canceled properties can be deleted.')
+        return super().unlink()
+

@@ -22,8 +22,9 @@ class EstatePropertyOffer(models.Model):
     seller_id = fields.Many2one('res.partner', string="Seller", requried=True, compute='_determine_seller',
                                 readoonly=False)
 
-    property_id = fields.Many2one('estate.property',requried=True, string="Property")
-    property_type_id=fields.Many2one("estate.property.type", related='property_id.property_type_id' , string='Property Type ID' ,store=1)
+    property_id = fields.Many2one('estate.property', requried=True, string="Property")
+    property_type_id = fields.Many2one("estate.property.type", related='property_id.property_type_id',
+                                       string='Property Type ID', store=1)
 
     @api.depends('property_id')
     def _determine_seller(self):
@@ -70,9 +71,9 @@ class EstatePropertyOffer(models.Model):
             offer.property_id.selling_price = offer.price
             offer.property_id.buyer_id = offer.buyer_id.id
             offer.property_id.status = 'offer_accepted'
-            print('offer.property_id.buyer_id=====>',offer.property_id.buyer_id)
-            print('buyer_id.id=====>',offer.buyer_id.id)
-            print('buyer_id=====>',offer.buyer_id)
+            print('offer.property_id.buyer_id=====>', offer.property_id.buyer_id)
+            print('buyer_id.id=====>', offer.buyer_id.id)
+            print('buyer_id=====>', offer.buyer_id)
 
     def refuse_offer(self):
         for offer in self:
@@ -85,9 +86,6 @@ class EstatePropertyOffer(models.Model):
          'Price must be greater than zero.'),
     ]
 
-
-
-
     @api.onchange('property_id.status')
     def _onchange_property_state(self):
         for offer in self:
@@ -96,3 +94,17 @@ class EstatePropertyOffer(models.Model):
             else:
                 offer.property_id.readonly = False
 
+    @api.model
+    def create(self, vals):
+        print(vals['property_id'])
+        print(vals['price'])
+        property = self.env['estate.property'].browse(vals['property_id'])
+        max_offer = max(property.mapped('offer_ids.price'))
+        if vals['price']<max_offer:
+            raise ValidationError(f'The offer must be higher than {max_offer}')
+        property.status = 'offer_recived'
+        print(property.mapped('offer_ids.price'))
+
+        print(max_offer)
+
+        return super().create(vals)

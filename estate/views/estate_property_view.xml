@@ -14,7 +14,7 @@
                 <header>
                     <button name="cancel_property" type="object" string="Cancel" class="oe_highlight" bg_color="#3498db"/>
                     <button name="confirm_sale" type="object" string="Sold" class="oe_highlight" bg_color="#3498db"/>
-                    <button name="offer_recived" type="object" string="dddd" class="oe_highlight" bg_color="#3498db"/>
+<!--                    <button name="do" type="object" string="dddd" class="oe_highlight" bg_color="#3498db"/>-->
                 </header>
                 <sheet>
                     <div class="on_title">
