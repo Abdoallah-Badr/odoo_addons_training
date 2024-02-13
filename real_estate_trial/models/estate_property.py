@@ -46,7 +46,10 @@ class Property(models.Model):
 
     buyer = fields.Many2one('res.partner', string="Buyer", copy=False)
     state = fields.Selection([('sold', 'Sold'), ('cancel', 'Cancel')])
-
+      _sql_constraints = [
+            ('no_of_expected_price_positive', 'CHECK(expected_price > 0)','The property expected price of must be positive.'),
+            ('no_of_sell_price_positive', 'CHECK(sell_price > 0)','The property sell price of must be positive.'),
+        ]
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
         for rec in self:
