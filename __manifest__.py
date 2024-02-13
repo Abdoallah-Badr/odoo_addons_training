@@ -12,6 +12,7 @@
         "views/estate_propert_offer_view.xml",
         "views/estate_propert_type_view.xml",
         "views/estate_propert_tag_view.xml",
+        "views/inherited_model_view.xml",
         "views/base_menu.xml",
     ],
     'application': True,
