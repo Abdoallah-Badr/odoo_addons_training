@@ -97,3 +97,11 @@ class EstateProperty(models.Model):
         for rec in self:
             currency = rec.env.company.currency_id
             rec.expected_price_word = currency.amount_to_text(rec.expected_price)
+
+    @api.ondelete(at_uninstall=False)
+    def unlink(self):
+        for rec in self:
+            if rec.state not in ("new", "canceled"):
+                raise UserError(f"this {rec.name} property is {rec.state} which its cant be deleted")
+            else:
+                return super().unlink()
