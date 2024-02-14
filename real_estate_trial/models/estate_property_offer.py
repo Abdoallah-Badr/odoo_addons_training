@@ -7,6 +7,7 @@ import datetime
 class Property_offer(models.Model):
     _name = 'estate.property.offer'
     _description = 'property offer model for estate module'
+    _order='price desc'
 
     price = fields.Float('Price',store=True)
     status = fields.Selection([('accepted', 'Accepted'), ('refused', 'Refused')], string='Status', copy=False)
@@ -46,7 +47,7 @@ class Property_offer(models.Model):
                 if rec.property_id:
                     property = rec.property_id
                     property.write({'sell_price':rec.price})
-                    return
+
 
 
     def action_property_refuse(self):
@@ -55,4 +56,3 @@ class Property_offer(models.Model):
                 raise UserError('this offer accepted before')
             else:
                 rec.status = 'refused'
-                return

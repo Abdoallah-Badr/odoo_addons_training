@@ -6,6 +6,7 @@ class Property(models.Model):
     _name = 'estate.property'
     _description = 'property model for estate module'
     _rec_name = "title"
+    _order = 'id desc'
 
     title = fields.Char(string='Title', required=True)
     description = fields.Text(string='Description', required=True)
@@ -18,8 +19,7 @@ class Property(models.Model):
     garden_orien = fields.Selection([('west', "West"), ('east', 'East'), ('north', 'North'), ('south', "South")],
                                     readonly=False)
     status = fields.Selection(
-        [('new', 'New'), ('received', 'Received'), ('accepted', 'Accepted'), ('accepted', 'Accepted'), ('sold', 'Sold'),
-         ('canceled', 'Canceled')], required=True)
+        [('new', 'New'), ('received', 'Received'),('accepted', 'Accepted'), ('sold', 'Sold'),('canceled','Canceled')], required=True)
 
     active = fields.Boolean(string='Active')
     available_form = fields.Date(string='Available from', copy=False, default=fields.Datetime.now)
@@ -44,7 +44,7 @@ class Property(models.Model):
     salesman = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True,
                                default=lambda self: self.env.user)
 
-    buyer = fields.Many2one('res.partner', string="Buyer", copy=False)
+    buyer = fields.Many2one('res.partner', string="Buyer",readonly=False ,copy=False)
     state = fields.Selection([('sold', 'Sold'), ('cancel', 'Cancel')])
     _sql_constraints = [
         ('no_of_expected_price_positive', 'CHECK(expected_price > 0)','The property expected price of must be positive.'),
@@ -65,11 +65,11 @@ class Property(models.Model):
             self.garden_orien = ''
 
     @api.onchange('offer_ids')
-    def _compute_selling_price(self):
+    def _onchange_selling_price(self):
         for rec in self:
             if not rec.offer_ids:
                 rec.sell_price = 0
-                rec.buyer = 0
+                rec.buyer = ""
 
 
     @api.depends('offer_ids')

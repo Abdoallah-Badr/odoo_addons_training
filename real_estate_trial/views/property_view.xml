@@ -39,6 +39,8 @@
                 <header>
                     <button name="action_property_sold" type="object" string="Sold"/>
                     <button name="action_property_cancel" type="object" string='Cancel'/>
+                    <field name="status" widget="statusbar"/>
+                    <!--statusbar_visible="'New,Received,Accepted,Sold"-->
                 </header>
                 <sheet>
                     <group>
@@ -47,8 +49,7 @@
                             <field name="property_tag_ids" options="{'no_create':True}" widget="many2many_tags"/>
 
                             <group>
-                                <field name="status"/>
-                                <field name="property_type_id" options="{'no_create':True,'no_open':True}"/>
+                                <field name="property_type_id" options="{'no_create':True}"/>
                                 <field name="post_code"/>
                                 <field name="available_form"/>
                             </group>

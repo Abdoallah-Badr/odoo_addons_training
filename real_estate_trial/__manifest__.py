@@ -19,6 +19,8 @@
          'views/module_main_views.xml',
         'views/property_view.xml',
         'views/property_offer_view.xml',
+        'views/property_type_views.xml'
+
     ],
     # 'assets': {'web.assets_backend':['static/src/css/styles.css']},
     'installable':True,
