@@ -125,6 +125,54 @@
             </field>
         </record>
 
+        <record id="properties_kanban_view" model="ir.ui.view">
+            <field name="name">Properties Kanban View</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div>
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <separator/>
+                                <group>
+                                    <group>
+                                        <div>
+                                            Expected Price:
+                                            <field name="expected_price"/>
+                                        </div>
+                                        <separator/>
+                                        <div t-if="record.state.raw_value == 'offer_received'">
+                                            Best Offer:
+                                            <field name="best_offer"/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <div t-if="record.selling_price.raw_value">
+                                            Selling Price:
+                                            <field name="selling_price"/>
+                                        </div>
+                                        <separator/>
+                                        <field name="tag_ads" widget="many2many_tags"
+                                               options="{'color_field': 'color'}"/>
+                                        <separator/>
+                                    </group>
+                                </group>
+                                <div t-if="record.state.raw_value == 'new'">
+                                    This is new!
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <record id="property_search_view" model="ir.ui.view">
             <field name="name">Property search</field>
             <field name="model">estate.property</field>
@@ -145,7 +193,8 @@
                     <field name="total_area"/>
                     <separator/>
                     <filter string="Availability" name="state" domain='[("state", "in", ["new", "offer_received"])]'/>
-                    <field string="Big Living Area(sqm)" name="living_area" filter_domain='[("living_area", ">=", self)]'/>
+                    <field string="Big Living Area(sqm)" name="living_area"
+                           filter_domain='[("living_area", ">=", self)]'/>
                     <group expand="1" string="Group By">
                         <filter string="postcode" name="postcode" context="{'group_by':'postcode'}"/>
                     </group>
@@ -156,8 +205,16 @@
         <record id="properties_action" model="ir.actions.act_window">
             <field name="name">Properties</field>
             <field name="res_model">estate.property</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,kanban,form</field>
             <field name="context">{'search_default_state' : 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a property advertisement
+                </p>
+                <p>
+                    Create real estate properties and follow the selling process.
+                </p>
+            </field>
         </record>
     </data>
 </odoo>
