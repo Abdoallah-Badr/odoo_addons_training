@@ -22,7 +22,7 @@ class EstateProperty(models.Model):
     property_type_id = fields.Many2one('estate.property.type', string="Property Type")
     postcode = fields.Char(string='Postcode', size=20)
     buyer_id = fields.Many2one('res.partner', string="Buyer")
-    seller_id = fields.Many2one('res.partner', string="Seller")
+    seller_id = fields.Many2one('res.users', string="Seller")
     description = fields.Text(string='Description')
     date_availability = fields.Date(string='Date Aavailability')
     expected_price = fields.Float(required=True, string='Expected Price', )
@@ -151,4 +151,5 @@ class EstateProperty(models.Model):
             if rec.status in ('sold', 'offer_accepted','offer_recived'):
                 raise ValidationError('Only new and canceled properties can be deleted.')
         return super().unlink()
+
 

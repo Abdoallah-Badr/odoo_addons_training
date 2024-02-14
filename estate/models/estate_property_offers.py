@@ -29,7 +29,7 @@ class EstatePropertyOffer(models.Model):
     @api.depends('property_id')
     def _determine_seller(self):
         for rec in self:
-            rec.seller_id = rec.property_id.seller_id
+            rec.seller_id = rec.property_id.seller_id.id
 
     @api.depends('validity')
     def _compute_validation_date(self):

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem id="estate_property_root_menu"
+              name="Real State "
+              web_icon=""
+              sequence="0"/>
+
+    <menuitem id="advertisments_root_menu"
+              name="Advertisments"
+              parent="estate_property_root_menu"
+              sequence="1"/>
+
+    <menuitem id="settings_root_menu"
+              name="Settings"
+              parent="estate_property_root_menu"
+              sequence="2"/>
+
+
+</odoo>
