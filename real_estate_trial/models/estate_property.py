@@ -28,10 +28,10 @@ class Property(models.Model):
     expected_price = fields.Float(string='Expected price')
     best_offer = fields.Float(string='Best offer', default=0, compute='_compute_best_offer')
     sell_price = fields.Float('Selling price', copy=False,
-                              # compute='_compute_selling_price',
-                              store=True)
-    sell_price_inwords = fields.Char('price in words', compute='_compute_amount_to_words')
+                              readonly=True,)
+    # fields.Monetary
 
+    sell_price_inwords = fields.Char('price in words', compute='_compute_amount_to_words')
     # area fields
     living_area = fields.Integer(string='Living area (sqm)')
     garden_area = fields.Integer(string='Garden area (sqm)', readonly=False)
@@ -46,14 +46,17 @@ class Property(models.Model):
 
     buyer = fields.Many2one('res.partner', string="Buyer", copy=False)
     state = fields.Selection([('sold', 'Sold'), ('cancel', 'Cancel')])
-
+    _sql_constraints = [
+        ('no_of_expected_price_positive', 'CHECK(expected_price > 0)','The property expected price of must be positive.'),
+        ('no_of_sell_price_positive', 'CHECK(sell_price > 0)','The property sell price of must be positive.'),
+    ]
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
         for rec in self:
             rec.total_area = rec.living_area + rec.garden_area
 
     @api.onchange('garden')
-    def _compute_garden_defaults(self):
+    def _onchange_garden_defaults(self):
         if self.garden == True:
             self.garden_area = 10
             self.garden_orien = 'north'
@@ -63,12 +66,11 @@ class Property(models.Model):
 
     @api.onchange('offer_ids')
     def _compute_selling_price(self):
-        for offer in self.offer_ids:
-            print(offer)
-            if offer.status == 'accepted':
-                # accepeted_list.append(offer)
-                self.sell_price = offer.price
-                self.buyer = offer.partner_id
+        for rec in self:
+            if not rec.offer_ids:
+                rec.sell_price = 0
+                rec.buyer = 0
+
 
     @api.depends('offer_ids')
     def _compute_best_offer(self):

@@ -5,3 +5,8 @@ class Property_Type(models.Model):
 
     name = fields.Char('Property Type',required=True)
 
+    _sql_constraints = [
+        ('type_name_unique',
+         'unique (name)',
+         'A type should define only one time.')
+    ]
