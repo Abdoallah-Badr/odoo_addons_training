@@ -6,6 +6,7 @@ class EstateProperty(models.Model):
 
 
     def confirm_sale(self):
+        print('this message from estate account ')
         for rec in self:
             rec.env["account.move"].create(
                 {

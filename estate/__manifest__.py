@@ -15,7 +15,7 @@ L       ong description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'account'],
 
     # always loaded
     'data': [
@@ -32,5 +32,5 @@ L       ong description of module's purpose
     'auto_install': True,
     'application': True,
     'license': 'LGPL-3',
+    'sequence': -330,
 }
-

@@ -45,9 +45,9 @@
     </record>
 
 
-    <menuitem id="estate_property_menu"
+    <menuitem id="estate_property_account_menu"
               name="Property Offers"
               sequence="2"
-              parent="settings_root_menu"
-              action="action_estate_property_offers_1"/>
+              parent="estate.estate_property_root_menu"
+              action="account.action_move_out_invoice_type"/>
 </odoo>

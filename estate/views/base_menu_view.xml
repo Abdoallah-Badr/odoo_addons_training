@@ -15,5 +15,11 @@
               parent="estate_property_root_menu"
               sequence="2"/>
 
+     <menuitem id="estate_account_invoice_menu"
+              name="Invoices"
+              sequence="3"
+              parent="estate_property_root_menu"
+              action="account.action_move_out_invoice_type"/>
+
 
 </odoo>

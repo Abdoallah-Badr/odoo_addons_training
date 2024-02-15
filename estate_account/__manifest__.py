@@ -14,7 +14,7 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','estate','account'],
+    'depends': ['base', 'estate', 'account'],
 
     # always loaded
     'data': [
@@ -24,5 +24,5 @@ Long description of module's purpose
     'demo': [
 
     ],
+    'sequence': 301,
 }
-

@@ -94,6 +94,7 @@ class EstateProperty(models.Model):
         }
 
     def confirm_sale(self):
+        print('this message from estate  ')
         for record in self:
             if record.status == 'canceled':
                 raise exceptions.UserError("Cannot confirm sale for a canceled item.")
