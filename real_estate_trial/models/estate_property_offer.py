@@ -32,7 +32,7 @@ class Property_offer(models.Model):
             expected_price = property.expected_price
             ninety_percentage= expected_price*0.9
             comparison_result = float_compare(offer_price,ninety_percentage,4)
-            if comparison_result > 0:
+            if comparison_result < 0:
                 raise ValidationError('the offer must be more than 90% of expected price')
             else:
                 pass

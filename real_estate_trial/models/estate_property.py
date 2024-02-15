@@ -19,7 +19,7 @@ class Property(models.Model):
     garden_orien = fields.Selection([('west', "West"), ('east', 'East'), ('north', 'North'), ('south', "South")],
                                     readonly=False)
     status = fields.Selection(
-        [('new', 'New'), ('received', 'Received'),('accepted', 'Accepted'), ('sold', 'Sold'),('canceled','Canceled')], required=True)
+        [('new', 'New'), ('received', 'Received'),('accepted', 'Accepted'), ('sold', 'Sold'),('canceled','Canceled')], required=True,copy=False)
 
     active = fields.Boolean(string='Active')
     available_form = fields.Date(string='Available from', copy=False, default=fields.Datetime.now)

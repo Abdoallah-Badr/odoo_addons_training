@@ -15,13 +15,14 @@
     'depends': ['base'],
 
     'data': [
-         'security/ir.model.access.csv',
-         'views/module_main_views.xml',
+        'security/ir.model.access.csv',
+        'views/module_main_views.xml',
         'views/property_view.xml',
         'views/property_offer_view.xml',
-        'views/property_type_views.xml'
+        'views/property_type_view.xml',
+        'views/property_tag_view.xml'
 
     ],
     # 'assets': {'web.assets_backend':['static/src/css/styles.css']},
-    'installable':True,
+    'installable': True,
 }

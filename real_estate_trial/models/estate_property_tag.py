@@ -5,4 +5,5 @@ class Property_Tag(models.Model):
     _order='name'
 
     name = fields.Char('Property tag',required=True)
+    color = fields.Integer()
 
