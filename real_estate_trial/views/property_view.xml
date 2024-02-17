@@ -10,11 +10,11 @@
                     <field name="post_code"/>
                     <field name="expected_price"/>
                     <field name="bedrooms"/>
-                    <field name="living_area"/>
-                    <field name="living_area"/>
                     <filter name="filter_available" domain="[('status', '!=', 'sold'), ('status', '!=', 'canceled')]"
                             string="Available"/>
                     <filter name="group_postcode" string="postcode" context="{'group_by': 'post_code'}"/>
+                    <filter name="living_area_filter" string="Area more than 250" domain="[('living_area', '>=', 250)]"
+                            help="Show property more than 250"/>
                 </search>
             </field>
         </record>
@@ -22,13 +22,16 @@
             <field name="name">property.tree</field>
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
-                <tree string="properties list">
+                <tree string="properties list" decoration-bf="status == 'accepted'"
+                      decoration-success="status in ('accepted','received')" decoration-muted="status == 'sold'">
                     <field name="title"/>
                     <field name="post_code"/>
                     <field name="bedrooms"/>
                     <field name="living_area"/>
                     <field name="expected_price"/>
                     <field name="sell_price"/>
+                    <field name="status" invisible="1"/>
+
                 </tree>
             </field>
         </record>
@@ -49,8 +52,8 @@
                                 <field name="title" style="font-size: 22px; font-weight: bold; margin-bottom:12px"/>
                                 <field name="property_tag_ids" options="{'color_field': 'color'} {'no_create':True }"
                                        widget="many2many_tags"/>
-
                                 <group>
+                                    <field name="status"/>
                                     <field name="property_type_id" options="{'no_create':True}"/>
                                     <field name="post_code"/>
                                     <field name="available_form"/>

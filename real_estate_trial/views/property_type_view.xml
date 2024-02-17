@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="sequence" widget="handle"/>
+                    <!--                    <field name="offer_count"/>-->
                     <field name="name"/>
                 </tree>
             </field>
@@ -16,22 +17,29 @@
             <field name="model">estate.property.type</field>
             <field name="arch" type="xml">
                 <form>
+
                     <sheet>
                         <group>
-                            <field name="name"/>
+                            <notebook>
+                                <page name="Description">
+                                    <field name="property_ids">
+                                        <tree>
+                                            <field name="title"/>
+                                            <field name="expected_price"/>
+                                            <field name="status"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
                         </group>
-                        <notebook>
-                            <page name="Description">
-                                <field name="property_ids">
-                                    <tree>
-                                        <field name="title"/>
-                                        <field name="expected_price"/>
-                                        <field name="status"/>
-                                    </tree>
+                        <group>
+                            <!--                            <field name="property_offer_ids" invisible="1"/>-->
+                            <!--                            <field name="property_ids" invisible="1"/>-->
+                            <field name="name"/>
+                            <field name="sequence"/>
+                        </group>
 
-                                </field>
-                            </page>
-                        </notebook>
+
                     </sheet>
                 </form>
             </field>
