@@ -41,10 +41,11 @@ class Property(models.Model):
     property_type_id = fields.Many2one('estate.property.type')
     property_tag_ids = fields.Many2many('estate.property.tag')
     offer_ids = fields.One2many('estate.property.offer', 'property_id', store=True)
-    salesman = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True,
+    salesman_id = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True,
                                default=lambda self: self.env.user)
 
     buyer = fields.Many2one('res.partner', string="Buyer", readonly=False, copy=False)
+
     state = fields.Selection([('sold', 'Sold'), ('cancel', 'Cancel')])
     _sql_constraints = [
         ('no_of_expected_price_positive', 'CHECK(expected_price > 0)',

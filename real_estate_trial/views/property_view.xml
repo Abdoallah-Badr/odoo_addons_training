@@ -93,7 +93,7 @@
                                 </page>
                                 <page string="Other Info">
                                     <group>
-                                        <field name="salesman"/>
+                                        <field name="salesman_id"/>
                                         <field name="buyer"/>
                                     </group>
                                 </page>
