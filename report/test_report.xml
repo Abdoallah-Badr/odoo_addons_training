@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="test_report_task" model="ir.actions.report">
+            <field name="name">test report task</field>
+            <field name="model">estate.property</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">real_state.test_form_report</field>
+            <field name="report_file">real_state.test_form_report</field>
+            <field name="binding_model_id" ref="model_estate_property"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="real_state.test_form_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <t t-set="title" t-value="'بسم الله الرحمن الرحيم'"/>
+                        <div style="text-align:center; font-size:24px; margin-top:5px;">
+                            <t t-esc="title"/>
+                        </div>
+                        <t t-set="solfa" t-value="'طلب سلفة'"/>
+                        <div style=" background-color: cyan;
+                                     padding: 10px;
+                                     text-align: center;
+                                     width: 200px;  height: 50px; border: 2px solid;
+                                     font-size: 20px;
+                                     margin: 0 auto;
+                                     max-width: 150px;
+                                     margin-top:25px;
+                        ">
+                            <p style="border-bottom: 3px solid black ;">
+                                <t t-esc="solfa"/>
+                            </p>
+                        </div>
+                        <div style="direction: rtl; font-size: 16px; margin-top:5px; margin-right:100px;">
+                            <p>تاريخ الطلب 24-10-2023</p>
+                        </div>
+                        <div style="margin: 0 auto; font-size: 18px; margin-top:5px; text-align: center;
+                                     text-decoration: underline;">
+                            <p>السلام عليكم ورحمة الله وبركاته</p>
+                        </div>
+                        <div style="direction: rtl; font-size: 14px; margin-top:5px; margin-right:25px;">
+                            <p>يرجى التكرم بالموافقة على صرف مبلغ 200 ريال سلفة تخصم من راتبي على عدد 1 قيمة كل دفعة 200
+                                ريال تخصم اعتبارا من شهر 11-2023
+                            </p>
+                        </div>
+                        <div style="margin: 0 auto; font-size: 18px; margin-top:5px; text-align: center;
+                                     text-decoration: underline;">
+                            <p>ولكم فائق التحية</p>
+                        </div>
+
+                        <table style="direction: rtl; margin-top:5px;"
+                               class="table table-bordered border border-dark">
+                            <thead>
+                                <tr>
+                                    <th style="color: gray;">الكود</th>
+                                    <th>الإسم كاملا</th>
+                                    <th>الجنسية</th>
+                                    <th>المهنة</th>
+                                    <th>القسم التابع له</th>
+                                    <th>الموقع الحالي</th>
+                                    <th>بداية المباشرة</th>
+                                    <th>الراتب</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="color: gray;">215</td>
+                                    <td>محمد شهيد محمد مياه</td>
+                                    <td>بنجلاديشي</td>
+                                    <td>حارس-سائق رصاص</td>
+                                    <td>صناعية القوز</td>
+                                    <td>صناعية القوز</td>
+                                    <td>06-11-2002</td>
+                                    <td>1500</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table style="direction: rtl; margin-top:5px; text-align: center;" border="0" cellspacing="0"
+                               cellpadding="0"
+                               class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td scope="col">
+                                        <p style="text-decoration: underline; height: 30px;">مقدم الطلب</p>
+                                    </td>
+                                    <td scope="col">
+                                        <p style="text-decoration: underline;height: 30px;">شؤون الموظفين</p>
+                                    </td>
+                                    <td scope="col">
+                                        <p style="text-decoration: underline;height: 30px;">مدير القسم</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 60px;"/>
+                                    <td style="height: 60px;"/>
+                                    <td style="height: 60px;"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <div style="direction: rtl; font-size: 18px;
+                                        float: right; width: 400px;  height: 220px; border: 2px solid;">
+                                <p style="margin-right:75px;margin-top:3px;">المحاسبة</p>
+                                <p style="margin-right:5px;">* المذكور عليه</p>
+                                <p style="margin-right:5px;">* المذكور عليه
+                                    <span style="margin-right: 200px"/>
+                                    ريال
+                                </p>
+                                <p style="margin-right:5px;">*المذكور عليه لا يوجد سلف</p>
+                                <p style="margin-right:5px;">*المذكور موظف جيد</p>
+                            </div>
+                            <div style="direction: rtl; font-size: 18px; float: left; margin-left:150px; margin-top:25px;">
+                                <p style="text-align: center; font-size: 28px;">يعتمد</p>
+                                <div class="custom-radio">
+                                    <input type="radio" id="radio1" name="radio-group"/>
+                                    <label for="radio1">يعتمد</label>
+                                </div>
+                                <div class="custom-radio" style="margin-top:10px;">
+                                    <input type="radio" id="radio1" name="radio-group"/>
+                                    <label for="radio1">يؤجل</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="direction: rtl; font-size: 18px; margin-top:250px">
+                            <div style="direction: rtl; font-size: 18px; float: right; width: 400px; margin-right:30px">
+                                <p style="margin-top:3px; margin-right:150px; text-decoration: underline; color:blue; margin-right:8px;">
+                                    المستلم
+                                </p>
+                                <p style="margin-right:10px; margin-right:50px;">
+                                    الاسم:
+                                    <span style="margin-right: 50px"/>
+                                    محمد شهيد محمد مياه
+                                </p>
+                                <p style="margin-right:10px; margin-right:50px;">التوقيع</p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
