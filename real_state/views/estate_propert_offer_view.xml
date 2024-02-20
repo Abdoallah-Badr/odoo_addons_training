@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+
+        <record id="offer_tree_view" model="ir.ui.view">
+            <field name="name">Offer tree</field>
+            <field name="model">estate.property.offer</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="price"/>
+                    <field name="partner_id"/>
+                    <field name="validity"/>
+                    <field name="date_deadline"/>
+                    <field name="property_id"/>
+                    <field name="status"/>
+                    <field name="property_type_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="offer_form_view" model="ir.ui.view">
+            <field name="name">Offer form</field>
+            <field name="model">estate.property.offer</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="property_id"/>
+                            </group>
+                            <group>
+                                <field name="price"/>
+                                <field name="status"/>
+                            </group>
+                            <group>
+                                <field name="validity"/>
+                                <field name="date_deadline"/>
+                                <field name="property_type_id" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="offer_search_view" model="ir.ui.view">
+            <field name="name">Offer Search</field>
+            <field name="model">estate.property.offer</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="price"/>
+                    <field name="status"/>
+                    <field name="partner_id"/>
+                    <field name="property_id"/>
+                    <field name="property_type_id"/>
+                    <field name="validity"/>
+                    <field name="date_deadline"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="offers_action" model="ir.actions.act_window">
+            <field name="name">Offers</field>
+            <field name="res_model">estate.property.offer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('property_type_id', '=', active_id)]</field>
+        </record>
+        <record id="offer_actions" model="ir.actions.act_window">
+            <field name="name">Offer</field>
+            <field name="res_model">estate.property.offer</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>
