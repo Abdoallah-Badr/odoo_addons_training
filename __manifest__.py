@@ -8,6 +8,7 @@
     'data': [
         "security/security.xml",
         "security/ir.model.access.csv",
+        "report/test_report.xml",
         "views/real_state_view.xml",
         "views/estate_propert_offer_view.xml",
         "views/estate_propert_type_view.xml",
