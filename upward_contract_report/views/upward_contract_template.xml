@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="money_refound_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <link rel="stylesheet" href="/estate/static/src/css/style.css"/>
+                        <div class="page">
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-xs-4">
+                                    <div class="text-center ">
+                                        <!-- Title with underline and bold -->
+                                        <h3 style="text-decoration: underline;padding:10px ; display:inline-block">
+                                            تصفية عهــــــدة
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style=" margin-right:32px;">
+                                <div class="row mb-3"> <!-- Added margin-bottom to create space -->
+                                    <div class="col-xs-12">
+                                        <table class="table table-bordered "
+                                               style="direction: rtl; # ;text-align:center;border: 2px solid  ">
+                                            <thead>
+                                                <tr style="text-align:center">
+                                                    <th style="width:200px">كود</th>
+                                                    <th>الاسم</th>
+                                                    <th>الجنسية</th>
+                                                    <th>المهنة</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width=10%">
+                                                        <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                                    </td>
+                                                    <td style="width=10%">
+                                                        <span style="margin:10px" t-esc="doc.employee_id.name"/>
+
+                                                    </td>
+                                                    <td style="width=10%">
+                                                        <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                                    </td>
+                                                    <td style="width=10%">
+                                                        <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                                    </td>
+
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 style="direction: rtl; margin-right:35px">حيث أن الموضح بياناته اعلاه يرغب في السفر
+                                    و
+                                    الحصول على تأشيرة :
+                                </h5>
+
+                                <div style=" margin-right:32px;margin-bottom:32px ">
+                                    <div class="row mb-3"> <!-- Added margin-bottom to create space -->
+                                        <div class="col-xs-12">
+                                            <table class="table table-bordered" style="direction: rtl; #007bff ; ">
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td>[&#160;&#160;&#160;&#160;&#160;&#160;&#160;] خروج و عودة</td>
+                                                        <td>[&#160;&#160;&#160;&#160;&#160;&#160;&#160;] خروج نهائي</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>[&#160;&#160;&#160;&#160;&#160;&#160;&#160;] استقالة</td>
+                                                        <td>[&#160;&#160;&#160;&#160;&#160;&#160;&#160;] انهاء خدمات</td>
+
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h5 style="direction: rtl; margin:35px">لذا نأمل الافادة و تحت مسئوليتكم عن التالي
+                                </h5>
+                                <div style=" margin-right:32px;margin-bottom:32px ">
+                                    <div class="row mb-3"> <!-- Added margin-bottom to create space -->
+                                        <div class="col-xs-12">
+                                            <table class="table table-bordered" style="direction: rtl; #007bff ; ">
+                                                <thead>
+                                                    <tr style="text-align:center">
+                                                        <th>المطلوب</th>
+                                                        <th>اسم المسئول</th>
+                                                        <th>توقيعه</th>
+                                                        <th>الملاحظات</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width=10%">العهدة</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width=10%">تسليم الاعمال</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width=10%">السكن</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width=10%">الموظفين</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width=10%">التأمين الطبي</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width=10%">العهدة</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width=10%">المحاسبة</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width=10%">المحاسبة</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width=10%">ورشة المعدات</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width=10%">المستودع الرئيسي</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width=10%">رخصة القيادة</td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                        <td style="width=10%"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <h5 style="direction: rtl; margin-right:35px">بما أن المذكور أخلى ذمته كما هو موضح لذا فانه لا
+                                    مانع لدينا من سفره
+                                </h5>
+                                <h5 style="direction: rtl; margin:20px ; text-align:center ">هذا و لكم خالص التحية
+                                </h5>
+                                <div style="  text-align:center ">
+                                    <div class="row mb-3"> <!-- Added margin-bottom to create space -->
+
+                                        <table style="direction: rtl ;text-align:center ">
+                                            <tbody>
+                                                <tr style="margin-bottom:30px">
+                                                    <td>المسئول المباشر</td>
+                                                    <td>رئيس القسم</td>
+                                                    <td>يعتمد</td>
+
+                                                </tr>
+                                                <tr style="margin-top:20px">
+                                                    <td><p> </p>______________________________________</td>
+                                                    <td>______________________________________</td>
+                                                    <td>______________________________________</td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+
+</odoo>
+

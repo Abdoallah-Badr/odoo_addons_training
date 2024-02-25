@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="vacation_request_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <div class="row">
+
+                                <!-- Middle Header - Title -->
+                                <div class="row" style="margin-bottom:10px;">
+                                    <div class="col-xs-4">
+                                        <div class="text-center">
+                                            <!-- Title with underline and bold -->
+                                            <h3 style="text-decoration: underline; font-weight: bold">
+                                                طلب اجازة
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Employee Information -->
+                            <div class="row-1" style=" margin-bottom:25px; direction: rtl;  ">
+                                <div class="col-xs-12">
+                                    <div class="text-left">
+                                        <h5>التاريخ : 24/10/2023</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  style=" margin-right:32px;margin-bottom:32px ">
+                                <div class="row mb-3"> <!-- Added margin-bottom to create space -->
+                                    <div class="col-xs-12">
+                                        <table class="table table-bordered" style="direction: rtl; #007bff">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:100px">كود</th>
+                                                    <th style="width:160px">الاسم</th>
+                                                    <th style="width:100px">الجنسية</th>
+                                                    <th style="width=70%">المهنة</th>
+                                                    <th style="width=70%">القسم التابع له</th>
+                                                    <th style="width=70%">الفرع</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width=10%"></td>
+                                                    <td style="width=10%"> </td>
+                                                    <td style="width=10%"> </td>
+                                                    <td style="width=10%"> </td>
+                                                    <td style="width=10%"> </td>
+                                                    <td style="width=10%"> </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-1" style=" margin-bottom:25px; direction: rtl;  ">
+                                <div class="col-xs-12">
+                                    <div class="text-left">
+                                        <h5>المكرم مدير قسم _____________________ اتقدم لكم بطلبي هذا و فيه افيدكم بأنني
+                                            ارغب بمنحي
+                                            اجازة
+                                        </h5>
+                                        <input type="checkbox" style="width:20px;height:20px ; margin-left:10px"
+                                               name="aa"/>اعتيادية
+                                        <input type="checkbox" style="width:20px;height:20px ; margin-left:10px"
+                                               name="aa"/>اضطرارية
+                                        <input type="checkbox" style="width:20px;height:20px ; margin-left:10px"
+                                               name="aa"/>داخلية
+                                        <input type="checkbox" style="width:20px;height:20px ; margin-left:10px"
+                                               name="aa"/>بدون مرتب
+                                        <input type="checkbox" style="width:20px;height:20px ; margin-left:10px"
+                                               name="aa"/>اجازة سنوية لمدة ______________________
+                                        <h5>و ذلك اعتبارا من تاريخ ___/ ___/ _____م
+                                        </h5>
+
+                                        <h5>و عنواني و رقم تليفوني في بلدي هو
+                                            _____________________________________________________________
+                                        </h5>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-xs-4">
+                                    <div class="text-center">
+                                        <!-- Title with underline and bold -->
+                                        <h4 style=" font-weight: bold">
+                                            هذا و لكم خالص الشكر
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-right:1px ;">
+                                <!-- Added margin-bottom to create space -->
+
+                                <table class="table " style="direction: rtl ">
+                                    <tr>
+                                        <th>
+                                            <h6 style="color: darkred;font-weight: bold ; text-decoration: underline ; margin-bottom:25px">
+                                                تعبأ من قبل المسئول المباشر
+                                            </h6>
+
+                                            <input type="checkbox"
+                                                   style="width:20px;height:20px ;margin-left:10px"
+                                                   name="aa"/>يوجد بديل من تاريخ __ / __ / ____
+                                            <p></p>
+                                            <div style="margin-bottom:20px "
+                                            ><input type="checkbox"
+                                                    style="width:20px;height:20px ;margin-left:10px "
+                                                    name="aa"/>لا يوجد بديل
+                                            </div>
+
+
+                                            <h6 style="color: darkred;font-weight: bold ; text-decoration: underline">
+                                                المسئول المباشر
+                                            </h6>
+                                            <h6>_______________________</h6>
+                                        </th>
+                                        <th>
+                                            <h6>مقدمه</h6>
+                                            <h6 style="margin-bottom:50px;">___________________</h6>
+                                            <h6 style="color: darkred;font-weight: bold ; text-decoration: underline ; margin-bottom:25px">
+                                                شئون الموظفين
+                                            </h6>
+                                            <h6>___________________</h6>
+
+                                        </th>
+                                    </tr>
+                                </table>
+
+
+                            </div>
+<!--                            <hr/>-->
+
+
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-xs-4">
+                                    <div class="text-center">
+                                        <!-- Title with underline and bold -->
+                                        <h3 style=" font-weight: bold ; text-decoration: underlinet">
+                                            قرار الادارة
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-1" style=" margin-bottom:25px; direction: rtl;  ">
+                                <div class="col-xs-12">
+                                    <div class="text-left">
+                                        <input type="checkbox"
+                                               style="width:20px;height:20px ;margin-left:10px"
+                                               name="aa"/>منح المذكور اجازة لمدة _____________ تبدأ من تاريخ ___ / _____
+                                        / _______ م
+                                        <p></p>
+                                        <input type="checkbox"
+                                               style="width:20px;height:20px ;margin-left:10px"
+                                               name="aa"/>تؤجل
+                                        <p></p>
+                                        <input type="checkbox"
+                                               style="width:20px;height:20px ;margin-left:10px"
+                                               name="aa"/>عدم الموافقة
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <h4 style="text-decoration: underline; font-weight: bold">يعتمد</h4>
+                            <h6>____________________</h6>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+
+</odoo>
+

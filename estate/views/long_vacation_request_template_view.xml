@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="long_vacation_request_template">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <div style="direction: rtl ; border: 2px solid black ; padding: 20px; margin-bottom:50px">
+                                <p>أقر انا
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                    الجنسية
+                                    <span t-esc="doc.employee_id.country_id.name"/>
+                                </p>
+                                <p>و حامل الاقامة رقم
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                    بتاريخ
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                    مكان الاصدار
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                </p>
+                                <p>و حامل جواز رقم
+                                    <span style="margin:10px" t-esc="doc.employee_id.passport_id"/>
+                                    بتاريخ
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                                    مكان الاصدار
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/>
+
+                                </p>
+                                <p>بأنني قد طلبت اعطائي اجازة لمدة
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                    و أتعهد بالعودة للعمل بعد انتهاء
+                                    اجازتي و في حالة عدم عودتي بعد انتهاء اجازتي مباشرة لا يحق لي العودة الى المملكة الا
+                                    بعد مرور ثلاث سنوات حسب نظام العمل و العمال الموضح بهذا الشان و المبني على الامر
+                                    الملكي الكريم بتحديد عودة العمالة المغادرة
+                                </p>
+                            </div>
+
+                            <div style="direction: ltr; border: 2px solid black ; padding: 20px; margin-bottom:50px">
+                                <p>I admit that i
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                    My Nationality
+                                    <span t-esc="doc.employee_id.country_id.name"/>
+                                </p>
+                                <p>holding iqama no.
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                    date:
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/></p>
+                                <p>place of issue
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                    and holding the passport No.
+                                    <span style="margin:10px" t-esc="doc.employee_id.passport_id"/>
+                                </p>
+                                <p>I requested a leave for
+                                    <span style="margin:10px" t-esc="doc.employee_id.name"/>
+                                    and I undertake to return to work after the end
+                                    of my leave. In the event that I do not return immediately after the end of my
+                                    leave, I am not entitled to return to the Kingdom except after three years have
+                                    passed according to the labor and workers' regulations specified in this regard and
+                                    based on the Royal Decree determining the return of departing workers
+                                </p>
+                            </div>
+
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+
+</odoo>
+

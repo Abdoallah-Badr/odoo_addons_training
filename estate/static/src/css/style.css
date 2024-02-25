@@ -1,0 +1,24 @@
+/* .class_name = for class */
+/* #id_name   = for id  */
+/* *{} for all elemnt in page */
+
+
+#report-title{
+    padding: 10px;
+    width: fit-content;
+    border: 1px solid;
+    border-radius: 25px;
+    color: red;
+    text-decoration: underline;
+}
+#title{
+    color: red;
+}
+#content{
+     padding: 10px;
+    width: fit-content;
+    border: 1px solid;
+    border-radius: 25px;
+    color: red;
+    text-decoration: underline;
+}

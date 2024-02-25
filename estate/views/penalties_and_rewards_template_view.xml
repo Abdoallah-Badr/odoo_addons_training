@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="penalties_and_rewards_report">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <div class="row">
+
+                                <!-- Middle Header - Title -->
+                                <div class="row" style="margin-bottom:50px;">
+                                    <div class="col-xs-4">
+                                        <div class="text-center">
+                                            <!-- Title with underline and bold -->
+                                            <h3 style="text-decoration: underline; font-weight: bold">
+                                                تقرير الجزاءات و المكافأت
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Employee Information -->
+                            <div class="row-1" style=" margin-bottom:25px;">
+                                <div class="col-xs-12">
+                                    <div class="text-center">
+                                        <h5>كود الموظف: 34243</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-2" style="margin-bottom:25px;"> <!-- Added margin-bottom to create space -->
+                                <!-- Employee Name -->
+                                <div class="col-xs-12">
+                                    <div class="text-center">
+                                        <h5>اسم الموظف : شهيد لال باسمان</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style=" margin-right:32px;margin-bottom:32px ">
+                                <div class="row mb-3"> <!-- Added margin-bottom to create space -->
+                                    <div class="col-xs-12">
+                                        <table class="table table-bordered" style="direction: rtl;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:100px">تاريخ الحركة</th>
+                                                    <th style="width:120px">اسم الجزاء</th>
+                                                    <th style="width:100px">القيمة</th>
+                                                    <th style="width=70%">الوصف  </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width=10%"></td>
+                                                    <td style="width=10%"> </td>
+                                                    <td style="width=10%"> </td>
+                                                    <td> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td > </td>
+                                                    <td style="width=10%"> </td>
+                                                    <td style="width=10%"> </td>
+                                                    <td style="width=10%"> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width=10%"> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style=" margin-right:32px;margin-bottom:32px ">
+                                <div class="row mb-3"> <!-- Added margin-bottom to create space -->
+                                    <div class="col-xs-12">
+                                        <table class="table " style="direction: rtl;">
+                                            <tr>
+                                                <th>
+                                                    <h4>شئون الموظفين</h4>
+                                                    <h6>.......................</h6>
+                                                </th>
+                                                <th>
+                                                    <h4>رأي الادارة</h4>
+                                                    <h5>مكافأة مستديمة مقدارها ( ) بداية من شهر</h5>
+                                                    <h5>مكافأة مؤقتة مقدارها ( ) بداية من شهر</h5>
+                                                    <h5>تؤجل</h5>
+                                                    <h6>يعتمد</h6>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            Report Content Goes Here
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+
+</odoo>
+
