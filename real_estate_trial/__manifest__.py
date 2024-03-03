@@ -22,6 +22,7 @@
         'views/property_type_view.xml',
         'views/property_tag_view.xml',
         'views/salesman_view.xml',
+        # 'views/test_report.xml'
 
     ],
     # 'assets': {'web.assets_backend':['static/src/css/styles.css']},

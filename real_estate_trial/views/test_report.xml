@@ -1,19 +1,126 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="test_report_record" model="ir.actions.report">
-        <field name="name">generic report</field>
-        <field name="model_id">estate.property</field>
-        <field name="report_type">qweb-pdf</field>
-        <field name="binding_model_id" ref="model_estate_property"/>
+        <field name="name">Generic Report</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-html</field>
+        <field name="binding_model_id" ref="hr.model_hr_employee"/>
+        <field name="paperformat_id" ref="hr_skills.paperformat_resume"/>
         <field name="binding_type">report</field>
-        <field name="report_name">real_estate_trial.test_report_template</field>
-        <field name="report_file">real_estate_trial.test_report_template</field>
+        <field name="report_name">hr.test_employee_report_template</field>
+        <field name="report_file">hr.test_employee_report_template</field>
+        <field name="print_report_name">'Employee report - %s' % (object.name).replace('/', '')</field>
     </record>
-    <template id="test_report_template" name="test template">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <h1>this is report</h1>
+    <template id="test_employee_report_template" name="test template">
+        <t t-call="web.html_container" t-encoding="utf-8">
+            <t t-foreach="docs" t-as="employee">
+                <t t-call="web.internal_layout">
+                    <div style="display:flex;   justify-content:space-between;">
+                        <h2 t-esc="employee"/>
+                        <img t-att-src="image_data_uri(employee.avatar_1920)" style="max-height:85pt;max-width:90%"
+                             alt="Employee Image"/>
+                    </div>
+                    <div>
+                        <table class="table table-bordered table-dark" style="width: 518px;">
+                            <tbody>
+                                <tr style="height: 23px;">
+                                    <td style="height: 23px; width: 135px;">Work Mobile</td>
+                                    <td style="height: 23px; width: 192px;"><t t-field="employee.mobile_phone"/></td>
+                                    <td style="height: 23px; width: 102.867px;">Work Phone</td>
+                                    <td style="height: 23px; width: 195.133px;"><t t-field="employee.work_phone"/></td>
+                                </tr>
+                                <tr style="height: 23px;">
+                                    <td style="height: 23px; width: 135px;">Work Email</td>
+                                    <td style="height: 23px; width: 192px;"><t t-field="employee.work_email"/></td>
+                                    <td style="height: 23px; width: 102.867px;">Location</td>
+                                    <td style="height: 23px; width: 195.133px;"><t t-field="employee.address_id"/></td>
+                                </tr>
+                                <tr style="height: 23px;">
+                                    <td style="height: 23px; width: 135px;">Department</td>
+                                    <td style="height: 23px; width: 192px;"><t t-field="employee.department_id"/></td>
+                                    <td style="height: 23px; width: 102.867px;">Job Position</td>
+                                    <td style="height: 23px; width: 195.133px;"><t t-field="employee.job_id"/></td>
+                                </tr>
+                                <tr style="height: 23px;">
+                                    <td style="height: 23px; width: 135px;">Manager</td>
+                                    <td style="height: 23px; width: 192px;"><t t-field="employee.parent_id"/></td>
+                                    <td style="height: 23px; width: 102.867px;">Coach</td>
+                                    <td style="height: 23px; width: 195.133px;"><t t-field="employee.coach_id"/></td>
+                                </tr>
+                                <tr style="height: 23px;">
+                                    <td style="height: 23px; width: 135px;">Work Schedule</td>
+                                    <td style="height: 23px; width: 192px;"><t t-field="employee.resource_calendar_id"/></td>
+                                    <td style="height: 23px; width: 102.867px;">Timezone</td>
+                                    <td style="height: 23px; width: 195.133px;"><t t-field="employee.tz"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table style="height: 237px; width: 604.383px;">
+                            <tbody>
+                                <tr style="height: 23px;">
+                                    <td style="width: 135px; height: 23px;">Private Email</td>
+                                    <td style="width: 144px; height: 23px;"><t t-field="employee.private_email"/></td>
+                                    <td style="width: 139px; height: 23px;">City</td>
+                                    <td style="width: 148.383px; height: 23px;"><t t-field="employee.private_city"/></td>
+                                </tr>
+                                <tr style="height: 23px;">
+                                    <td style="width: 135px; height: 23px;">Phone</td>
+                                    <td style="width: 144px; height: 23px;"><t t-field="employee.private_phone"/></td>
+                                    <td style="width: 139px; height: 23px;">Km Home-Work</td>
+                                    <td style="width: 148.383px; height: 23px;"><t t-field="employee.km_home_work"/></td>
+                                </tr>
+                                <tr style="height: 23px;">
+                                    <td style="width: 135px; height: 23px;">Nationality</td>
+                                    <td style="width: 144px; height: 23px;"><t t-field="employee.country_id"/></td>
+                                    <td style="width: 139px; height: 23px;">Identification No</td>
+                                    <td style="width: 148.383px; height: 23px;"><t t-field="employee.user_id"/></td>
+                                </tr>
+                                <tr style="height: 23px;">
+                                    <td style="width: 135px; height: 23px;">Passport No</td>
+                                    <td style="width: 144px; height: 23px;"><t t-field="employee.passport_id"/></td>
+                                    <td style="width: 139px; height: 23px;">Gender</td>
+                                    <td style="width: 148.383px; height: 23px;"><t t-field="employee.gender"/></td>
+                                </tr>
+                                <tr style="height: 23px;">
+                                    <td style="width: 135px; height: 23px;">Birthday</td>
+                                    <td style="width: 144px; height: 23px;"><t t-field="employee.birthday"/></td>
+                                    <td style="width: 139px; height: 23px;">Place of Birth</td>
+                                    <td style="width: 148.383px; height: 23px;"><t t-field="employee.place_of_birth"/></td>
+                                </tr>
+                                <tr style="height: 23px;">
+                                    <td style="width: 135px; height: 23px;">Country of Birth</td>
+                                    <td style="width: 144px; height: 23px;"><t t-field="employee.country_of_birth"/></td>
+                                    <td style="width: 139px; height: 23px;">Marital Status</td>
+                                    <td style="width: 148.383px; height: 23px;"><t t-field="employee.marital"/></td>
+                                </tr>
+                                <tr style="height: 43px;">
+                                    <td style="width: 135px; height: 43px;">Number of Children</td>
+                                    <td style="width: 144px; height: 43px;"><t t-field="employee.children"/></td>
+                                    <td style="width: 139px; height: 43px;">Emergency Contact</td>
+                                    <td style="width: 148.383px; height: 43px;"><t t-field="employee.emergency_contact"/></td>
+                                </tr>
+                                <tr style="height: 43px;">
+                                    <td style="width: 135px; height: 43px;">Emergency Phone</td>
+                                    <td style="width: 144px; height: 43px;"><t t-field="employee.emergency_phone"/></td>
+                                    <td style="width: 139px; height: 43px;">Work Permit</td>
+                                    <td style="width: 148.383px; height: 43px;"><t t-field="employee.permit_no"/></td>
+                                </tr>
+                                <tr style="height: 43px;">
+                                    <td style="width: 135px; height: 43px;">Visa Number</td>
+                                    <td style="width: 144px; height: 43px;"><t t-field="employee.visa_no"/></td>
+                                    <td style="width: 139px; height: 43px;">Field of Study</td>
+                                    <td style="width: 148.383px; height: 43px;"><t t-field="employee.study_field"/></td>
+                                </tr>
+                                <tr style="height: 23px;">
+                                    <td style="width: 135px; height: 23px;">Certificate Level</td>
+                                    <td style="width: 144px; height: 23px;"><t t-field="employee.certificate"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
             </t>
         </t>
     </template>

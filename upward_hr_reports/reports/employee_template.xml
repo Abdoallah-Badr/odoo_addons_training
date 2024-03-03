@@ -5,13 +5,14 @@
         <t t-call="web.html_container" t-encoding="utf-8">
             <t t-call="web.internal_layout">
                 <t t-foreach="docs" t-as="employee">
+                    <link ref="stylesheet" href="/upward_hr_reports/static/src/css/table_style.css"/>
                     <div style="position:relative">
-                        <h2 style="display:inline;" t-esc="employee.name"/>
-                        <img  t-att-src="image_data_uri(employee.avatar_1920)"
+                        <h2 class="class_red" style="display:inline;" t-esc="employee.name"/>
+                        <img t-att-src="image_data_uri(employee.avatar_1920)"
                              style="position:fixed; right:5%; max-height:85pt;max-width:70%"
                              alt="Employee Image"/>
                     </div>
-                    <div style="position:relative; font-size:12px; margin-top:7rem">
+                    <div style="position:relative; font-size:12px; margin-top:7rem margin-right:2rem ">
                         <table class="table table-bordered  table-sm" style="width: 700px;">
                             <tbody>
                                 <tr style="height: 23px;">
@@ -70,9 +71,11 @@
                                 </tr>
                             </tbody>
                         </table>
+
+
                     </div>
 
-                    <div  style="font-size:12px; margin-top:3rem;">
+                    <div style="font-size:12px; margin-top:3rem;">
                         <h4 style="font-size:20px; ">Private Information</h4>
                         <table class="table table-bordered  table-sm"
                                style="height: 237px; width: 700px;">
@@ -187,6 +190,8 @@
                         </table>
                     </div>
                 </t>
+
+
             </t>
         </t>
     </template>
