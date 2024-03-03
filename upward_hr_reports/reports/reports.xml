@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="action_upward_contract_report" model="ir.actions.report">
+            <field name="name">Upward Contract</field>
+            <field name="model">hr.contract</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">upward_hr_reports.upward_contract_template</field>
+            <field name="report_file">upward_hr_reports.upward_contract_template</field>
+            <field name="binding_model_id" ref="hr_contract.model_hr_contract"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_upward_employee_report" model="ir.actions.report">
+            <field name="name">Upward print employee</field>
+            <field name="model">hr.employee</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="hr.model_hr_employee"/>
+            <field name="paperformat_id" ref="hr_skills.paperformat_resume"/>
+            <field name="binding_type">report</field>
+            <field name="report_name">upward_hr_reports.employee_report_template</field>
+            <field name="report_file">upward_hr_reports.employee_report_template</field>
+            <field name="print_report_name">'Employee report - %s' % (object.name).replace('/', '')</field>
+        </record>
+    </data>
+
+</odoo>
+
